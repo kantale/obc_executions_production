@@ -1,2 +1,4 @@
-Flask
-requests
+flask 
+flask-sqlalchemy 
+flask-marshmallow 
+marshmallow-sqlalchemy
