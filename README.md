@@ -21,6 +21,13 @@ Run airflow sub-commands in docker-compose:
     - `docker-compose run --rm webserver airflow list_dags` 
 - Test specific task :     
     - `docker-compose run --rm webserver airflow test [DAG_ID] [TASK_ID] [EXECUTION_DATE]`
+- Run shell of airflow container : 
+    - `docker exec -it docker-airflow_airflowserver_1 bash`
+
+### Client 
+---
+REST API:
+- Dag generation remotely
 
 ## Credits
 ---
