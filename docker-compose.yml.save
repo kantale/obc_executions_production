@@ -13,15 +13,15 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    restart: always
     depends_on:
       - postgres
-    restart: always
+      - airflowserver
     volumes:
       - ./client:/code
       - ./dags:/code/generated_dags
     ports:
       - "5000:5000"
-
   airflowserver:
     image: puckel/docker-airflow:1.10.1
     build:
