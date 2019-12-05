@@ -8,8 +8,9 @@ Instructions:
 - Install prerequisites :
     - Docker
     - Docker-Compose
+    - Install prerequisites simply running the file `install.sh`
 - Run the service
-    - `docker-compose up`
+    - `docker-compose up` with logging or `docker-compose up -d` without logging
 
 - Open http://localhost:8080
 

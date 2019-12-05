@@ -34,7 +34,6 @@ def get_full_path(filename):
     '''
     return f"{dag_directory}/{filename}"
 
-
 def generate_dag_file(name,instructions):
     '''
     Get the data from request to generate the dag file
@@ -104,6 +103,11 @@ def generate_dag():
     gen_result['owner']= owner
     gen_result['status']="untriggered"
     return gen_result
+
+@app.route('/update_dag', methods=['PUT'])
+def update_dag():
+    '''
+    '''
 
 
 @app.route('/delete_dag', methods=['POST'])
