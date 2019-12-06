@@ -7,7 +7,6 @@ import json
 import os 
 from datetime import datetime
 
-
 # Init app
 app = Flask(__name__)
 
