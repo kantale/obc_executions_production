@@ -15,8 +15,11 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - postgres
+      - airflowserver
     restart: always
     volumes:
+      # docker connect with client to get info or execute commands
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./client:/code
       - ./dags:/code/generated_dags
     ports:
@@ -43,6 +46,7 @@ services:
       - ./logs:/usr/local/airflow/logs
       # Configuration File
       - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+      - /var/run/docker.sock:/var/run/docker.sock
       # For custom plugins
       # - ./plugins:/usr/local/airflow/plugins
     ports:
