@@ -1,5 +1,6 @@
-curl -X POST \
-  http://0.0.0.0:8080/api/experimental/dags/myexample/dag_runs \
-  -H 'Cache-Control: no-cache' \
-  -d '{}'
-
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+	"dag_name":"pca_plink_and_plot__1", 
+	"owner":"Manos"}' \
+  http://0.0.0.0:5000/trigger_dag
