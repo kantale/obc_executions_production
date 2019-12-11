@@ -31,9 +31,23 @@ echo $OBC_USER_ID | tee obc_id.txt
 # Set the id file read-only
 chmod 0444 obc_id.txt
 
-# Set files 
+# Set files
+mkdir dags
+mkdir logs
+mkdir config
+# File contains images
+wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/docker-compose.yml
+# Config File
+cd config ; wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/config/airflow.cfg ; cd ..
 
-
+# Client Configuration Should not be existed TODO upload to DockerHub
+mkdir OBC_Client; cd OBC_Client
+mkdir generated_dags
+# Dockerfile 
+wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/client.py
+wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/requirements.txt
+wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/Dockerfile
+# Client service
 
 # Check if docker exist in your environment
 docker -v
