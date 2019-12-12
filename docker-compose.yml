@@ -22,7 +22,7 @@ services:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
       - ./client:/code
-      - ./dags:/code/generated_dags
+      - ./generated_dags:/code/generated_dags
     ports:
       - "5000:5000"
 
@@ -42,7 +42,7 @@ services:
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
     volumes:
-      - ./dags:/usr/local/airflow/dags
+      - ./generated_dags:/usr/local/airflow/dags
       # Folder where airflow should store its log files
       - ./logs:/usr/local/airflow/logs
       # Configuration File
