@@ -21,7 +21,8 @@ services:
     volumes:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./client:/code
+      # Uncomment only for production purposes TODO (make another one compose)
+      #- ./client:/code
       - ./generated_dags:/code/generated_dags
     ports:
       - "5000:5000"
