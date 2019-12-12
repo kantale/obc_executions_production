@@ -1,4 +1,5 @@
-# Airflow using Docker-compose
+#  Openbio Executor 
+#  using Docker-compose
 ---
 
 ### Getting Started 
@@ -27,14 +28,7 @@ Run airflow sub-commands in docker-compose:
 
 ### Client 
 ---
-REST API:
-- Dag generation remotely
+OpenBioC Client (Flask): 
+- Dag generation remotely via requests
 
-## Credits
----
-- [Apache Airflow](https://github.com/apache/incubator-airflow)
-- [docker-airflow](https://github.com/puckel/docker-airflow/tree/1.10.0-5)
-
-
- 
 

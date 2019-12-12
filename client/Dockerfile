@@ -1,16 +1,3 @@
-#FROM python:3.7-alpine
-# RUN mkdir client
-# WORKDIR /client
-# ENV FLASK_ENV=development
-# ENV FLASK_APP=client.py
-
-# RUN pip install pipenv
-# RUN pip install flask flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy
-# COPY /entrypoint.sh /entrypoint.sh
-# ENTRYPOINT ["/entrypoint.sh"]
-# CMD flask run
-
-
 FROM python:3.7-alpine
 
 EXPOSE 5000

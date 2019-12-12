@@ -75,4 +75,6 @@ if [ $? -eq 1 ] ; then
 
 fi
 
+# Set OBC_Client_run.sh
 
+wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/OBC_client_run.sh
