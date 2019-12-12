@@ -43,11 +43,11 @@ cd config ; wget https://raw.githubusercontent.com/manoskout/docker-airflow/mast
 # Client Configuration Should not be existed TODO upload to DockerHub
 mkdir OBC_Client; cd OBC_Client
 mkdir generated_dags
-# Dockerfile 
+# Dockerfile - Client Service
 wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/client.py
 wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/requirements.txt
 wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/Dockerfile
-# Client service
+
 
 # Check if docker exist in your environment
 docker -v
