@@ -7,6 +7,7 @@ import json
 import os 
 from datetime import datetime
 import docker
+import requests
 
 def docker_setups():
     '''
@@ -155,10 +156,11 @@ def delete_dag():
 def get_airflow_container():
     '''
     Trying to find the airflow container 
-    and return the airflow container
+    and return the airflow container (Not working)
     '''
     docker = docker_setups()
     list_of_containers = docker.containers.list()
+    print()
     for i in range(len(list_of_containers)):
         if 'docker-airflow_airflowserver_1' == list_of_containers[i].name:
             airflow = list_of_containers[i]
@@ -166,6 +168,7 @@ def get_airflow_container():
 
 def trigger_command(dag):
     '''
+    Not working
     '''
     return f"airflow trigger_dag {dag}"
 
@@ -173,26 +176,47 @@ def trigger_dag(dag):
     '''
     '''
     ret={}
-    airflow = get_airflow_container()
+    # airflow = get_airflow_container() # Not working
     # the response of execution look like : 
     # ExecResult(exit_code=0, output=b'') 
-    exec_out = airflow.exec_run(trigger_command(dag))    
-    ret["status_code"]= exec_out[0]
-    ret["output"]=exec_out[1]
-    return ret
+    # exec_out = airflow.exec_run(trigger_command(dag)) # Not working   
+    # ret["status_code"]= exec_out[0]
+    # ret["output"]=exec_out[1]
+    # return ret
 
 @app.route('/trigger_dag', methods=['POST'])
 def dag_trigger():
     '''
     Trigger the dag from OpenBio
+    Function starts using docker between containers which didn't work
+    As a result, we will use experimental api from airflow
+
+    Request using curl :
+    curl -X POST \
+      http://localhost:8080/api/experimental/dags/pca_plink_and_plot__1/dag_runs \
+      -H 'Cache-Control: no-cache' \
+      -H 'Content-Type: application/json' \
+      -d '{}'
+
+    According to docker-compose file we have create containers network 
+    which communicate both airflow and OBC_client
     '''
     ret = {}
     data = json.loads(request.get_data().decode())
 
     dag = data['dag_name']
     owner= data['owner']
-    info = trigger_dag(dag)
-    ret["code"]=info["status_code"]
-    ret["output"]= info["output"]
-    ret["status"]= "triggered"
-    return ret
+    url = f'http://172.18.0.5:8080/api/experimental/dags/{dag}/dag_runs'
+    headers = {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+        }
+
+    payload={} # Future changes for scheduling workflow
+    response = requests.post(url,data=json.dumps(payload),headers=headers)
+    print(response.json())
+    # info = trigger_dag(dag)
+    # ret["code"]=info["status_code"]
+    # ret["output"]= info["output"]
+    # ret["status"]= "triggered"
+    return response.json()

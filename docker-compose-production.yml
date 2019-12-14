@@ -8,7 +8,8 @@ services:
       - POSTGRES_DB=airflow
     ports:
       - "5432:5432"
-  
+    networks:
+      air_db:
   restapi:
     image: manoskoutoulakis/obc_client:latest
     build:
@@ -27,6 +28,11 @@ services:
       - datavolume:/code/generated_dags
     ports:
       - "5000:5000"
+    networks:
+      air_rest:
+        ipv4_address: 172.18.0.4
+      air_db:      
+    container_name: OBC_client      
 
   airflowserver:
     image: puckel/docker-airflow:1.10.1
@@ -54,11 +60,25 @@ services:
       # - ./plugins:/usr/local/airflow/plugins
     ports:
       - "8080:8080"
+    networks:
+      air_rest:
+        ipv4_address: 172.18.0.5
+      air_db:
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
       interval: 15s
       timeout: 15s
       retries: 3
+    container_name: airflow
 volumes:
   datavolume: 
+
+networks:
+  air_rest:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.0.0/16
+  air_db:
