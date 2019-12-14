@@ -11,6 +11,10 @@ services:
   
   restapi:
     image: manoskoutoulakis/obc_client:latest
+    build:
+      # Uncomment only for production purposes TODO (make another one compose)
+      context: ./client
+      dockerfile: Dockerfile
     depends_on:
       - postgres
       - airflowserver
@@ -18,8 +22,9 @@ services:
     volumes:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
-      # volume which share data with airflow
-      - dagvolume:/code/generated_dags
+      # Uncomment only for production purposes TODO (make another one compose)
+      - ./client:/code
+      - datavolume:/code/generated_dags
     ports:
       - "5000:5000"
 
@@ -39,8 +44,7 @@ services:
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
     volumes:
-      # Volume which share data with client
-      - dagvolume:/usr/local/airflow/dags
+      - datavolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
       #- ./logs:/usr/local/airflow/logs
       # Configuration File
@@ -57,5 +61,4 @@ services:
       timeout: 15s
       retries: 3
 volumes:
-  # client-airflow dags volume
-  dagvolume:
+  datavolume: 
