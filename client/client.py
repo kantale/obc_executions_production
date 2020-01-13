@@ -71,22 +71,34 @@ def generate_dag_file(name,instructions):
     # ret['owner']= 
     return ret
 
+def delete_from_airflow(dag_name):
+    '''
+    Delete the dag from airflow Database
+    '''
+    url = f'http://172.18.0.5:8080/api/experimental/dags/{dag_name}/dag_runs'
+    headers = {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+        }
 
-def delete_dag_file(filename):
+    response = requests.delete(url)
+
+    return response
+
+def delete_dag_file(dag_name):
     '''
     Delete selected dag file
     '''
     ret={}
-    full_path = get_full_path(filename)
+    full_path = get_full_path(dag_name)
     if os.path.exists(full_path):
         os.remove(full_path)
-        ret['generate_date'] = datetime.now()
-        ret['error_msg']= "The file removed successfully"
+        ret['delete_date'] = datetime.now()
     else:
         ret['generate_date'] = None
         ret['msg']= "The file does not exist"
-
     return ret
+
 @app.route('/generate_dag', methods=['POST'])
 def generate_dag():
     '''
@@ -128,7 +140,7 @@ def update_dag():
     return up_result
 
 
-@app.route('/delete_dag', methods=['POST'])
+@app.route('/delete_dag', methods=['DELETE','GET'])
 def delete_dag():
     '''
     Get request from openBio platform
@@ -144,15 +156,19 @@ def delete_dag():
         status:deleted
     '''
     # Parse data json to dict
-    data = json.loads(request.get_data().decode())     
-    filename = f"{data['filename']}.py"
+
+    delete_result={}
+
+    dag_name = request.args.get('dag')
     # file_content = data['bash']
-    owner = data['owner']
-    delete_result['date'] = delete_dag_file(filename)
+    owner = request.args.get('owner')
+    delete_result['date'] = delete_dag_file(dag_name)
     delete_result['owner']= owner
-    delete_result['filename']=filename
-    # gen_result['status']="deleted"
+    delete_result['dag_name']=dag_name
+    delete_result['status']="deleted"
+    delete_result['output'] = delete_from_airflow(dag_name)
     return delete_result
+
 def get_airflow_container():
     '''
     Trying to find the airflow container 
@@ -172,17 +188,6 @@ def trigger_command(dag):
     '''
     return f"airflow trigger_dag {dag}"
 
-def trigger_dag(dag):
-    '''
-    '''
-    ret={}
-    # airflow = get_airflow_container() # Not working
-    # the response of execution look like : 
-    # ExecResult(exit_code=0, output=b'') 
-    # exec_out = airflow.exec_run(trigger_command(dag)) # Not working   
-    # ret["status_code"]= exec_out[0]
-    # ret["output"]=exec_out[1]
-    # return ret
 
 @app.route('/trigger_dag', methods=['POST'])
 def dag_trigger():
@@ -214,9 +219,5 @@ def dag_trigger():
 
     payload={} # Future changes for scheduling workflow
     response = requests.post(url,data=json.dumps(payload),headers=headers)
-    print(response.json())
-    # info = trigger_dag(dag)
-    # ret["code"]=info["status_code"]
-    # ret["output"]= info["output"]
-    # ret["status"]= "triggered"
+
     return response.json()

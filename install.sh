@@ -9,18 +9,19 @@
 #	- docker-compose
 
 
-export OBC_CLIENT_PATH= "/home/"$USER"/obc_client"
+export OBC_CLIENT_PATH="/home/"$USER"/obc_client"
 
-echo "Set installation path on your environment: "$OBC_CLIENT_PATH 
+echo "Set installation path on your environment: " $OBC_CLIENT_PATH 
 # Generate the installation file
 mkdir $OBC_CLIENT_PATH
-
+echo $?
+echo "Make dir exit code"
 export OBC_USER_ID=$(dbus-uuidgen)
 
 if [ $? -eq 1 ] ; then
 	echo "uuidgen is not installed"
 	echo "uuidgen installation start...."
-	sudo apt-get install uuid-runtime
+ 	sudo apt-get install uuid-runtime
 	export $OBC_USER_ID=$(dbus-uuidgen)
 fi
 cd $OBC_CLIENT_PATH
@@ -32,21 +33,22 @@ echo $OBC_USER_ID | tee obc_id.txt
 chmod 0444 obc_id.txt
 
 # Set files
-mkdir dags
-mkdir logs
+#mkdir dags
+#mkdir logs
 mkdir config
 # File contains images
-wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/docker-compose.yml
+wget https://raw.githubusercontent.com/manoskout/OpenBioC_Execution/master/docker-compose.yml
 # Config File
-cd config ; wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/config/airflow.cfg ; cd ..
+cd config ; wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/config/airflow.cfg
+cd ..
 
 # Client Configuration Should not be existed TODO upload to DockerHub
-mkdir OBC_Client; cd OBC_Client
-mkdir generated_dags
+#mkdir OBC_Client; cd OBC_Client
+#mkdir generated_dags
 # Dockerfile - Client Service
-wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/client.py
-wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/requirements.txt
-wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/Dockerfile
+#wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/client.py
+#wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/requirements.txt
+#wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/client/Dockerfile
 
 
 # Check if docker exist in your environment
@@ -75,6 +77,16 @@ if [ $? -eq 1 ] ; then
 
 fi
 
-# Set OBC_Client_run.sh
-
-wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/OBC_client_run.sh
+# Set OBC_Client_run.sh (Optional)
+# wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/OBC_client_run.sh
+#cd $OBC_CLIENT_PATH
+echo "Running Directory : " $(pwd)
+docker-compose up -d
+if [ $? -eq 1 ] ; then
+#	echo "Subnet already in use..."
+#        echo "Remove networks"
+#	docker network prune
+#        docker-compose up -d
+#        echo "service run test  code -> " $?
+	docker-compose down
+fi

@@ -72,13 +72,18 @@ services:
       retries: 3
     container_name: airflow
 volumes:
+  # Dag volumes 
   datavolume: 
 
 networks:
+  # Communication between client and airflow restapi
+  # 172.18.0.4 --> client IP
+  # 172.18.0.5 --> airflow IP
   air_rest:
     driver: bridge
     ipam:
       driver: default
       config:
       - subnet: 172.18.0.0/16
+  # Communication between airflow and database
   air_db:
