@@ -30,9 +30,9 @@ services:
     container_name: executor_OBC_Client
 
   airflowserver:
-    image: puckel/docker-airflow:1.10.1
+    image: puckel/docker-airflow:1.10.6
     build:
-      context: https://github.com/puckel/docker-airflow.git#1.10.1
+      context: https://github.com/puckel/docker-airflow.git#1.10.6
       dockerfile: Dockerfile
       args:
         AIRFLOW_DEPS: gcp_api,s3
@@ -72,10 +72,14 @@ volumes:
   # client-airflow dags volume
   dagvolume:
 networks:
+  #Communication between client and airflow restapi
+  # 172.18.0.4 --> client IP
+  # 172.18.0.5 --> airflow IP
   air_rest:
     driver: bridge
     ipam:
       driver: default
       config:
       - subnet: 172.18.0.0/16
+  # Communication with all services 
   main_net:

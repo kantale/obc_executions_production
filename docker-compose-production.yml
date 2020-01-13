@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      air_db:
+      main_net:
   restapi:
     image: manoskoutoulakis/obc_client:latest
     build:
@@ -31,7 +31,7 @@ services:
     networks:
       air_rest:
         ipv4_address: 172.18.0.4
-      air_db:      
+      main_net:      
     container_name: OBC_client      
 
   airflowserver:
@@ -63,7 +63,7 @@ services:
     networks:
       air_rest:
         ipv4_address: 172.18.0.5
-      air_db:
+      main_net:
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
@@ -86,4 +86,4 @@ networks:
       config:
       - subnet: 172.18.0.0/16
   # Communication between airflow and database
-  air_db:
+  main_net:
