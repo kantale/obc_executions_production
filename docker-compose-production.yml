@@ -16,6 +16,8 @@ services:
       # Uncomment only for production purposes TODO (make another one compose)
       context: ./client
       dockerfile: Dockerfile
+    environment:
+      - OBC_USER_ID=${OBC_USER_ID}
     depends_on:
       - postgres
       - airflowserver

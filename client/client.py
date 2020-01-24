@@ -99,7 +99,7 @@ def delete_dag_file(dag_name):
         ret['msg']= "The file does not exist"
     return ret
 
-@app.route('/generate_dag', methods=['POST'])
+@app.route(f"/{os.environ['OBC_USER_ID']}/generate_dag", methods=['POST'])
 def generate_dag():
     '''
     Get request from openBio platform
@@ -126,7 +126,7 @@ def generate_dag():
     gen_result['status']="untriggered"
     return gen_result
 
-@app.route('/update_dag', methods=['PUT'])
+@app.route(f"/{os.environ['OBC_USER_ID']}/update_dag", methods=['PUT'])
 def update_dag():
     '''
     '''
@@ -140,7 +140,7 @@ def update_dag():
     return up_result
 
 
-@app.route('/delete_dag', methods=['DELETE','GET'])
+@app.route(f"/{os.environ['OBC_USER_ID']}/delete_dag", methods=['DELETE','GET'])
 def delete_dag():
     '''
     Get request from openBio platform
@@ -189,7 +189,7 @@ def trigger_command(dag):
     return f"airflow trigger_dag {dag}"
 
 
-@app.route('/trigger_dag', methods=['POST'])
+@app.route(f"/{os.environ['OBC_USER_ID']}/trigger_dag", methods=['POST'])
 def dag_trigger():
     '''
     Trigger the dag from OpenBio

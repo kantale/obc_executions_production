@@ -24,13 +24,13 @@ if [ $? -eq 1 ] ; then
  	sudo apt-get install uuid-runtime
 	export $OBC_USER_ID=$(dbus-uuidgen)
 fi
+echo -e "Client ID : \033[38;2;0;255;0m$OBC_USER_ID\033[0m"
+
 cd $OBC_CLIENT_PATH
 
-echo "Unique id for OpenBioC server generated :"
-echo $OBC_USER_ID | tee obc_id.txt
+echo -e "Client ID for OpenBioC Server : \033[38;2;0;255;0m$OBC_USER_ID\033[0m"
+echo OBC_USER_ID=$OBC_USER_ID | tee .env
 
-# Set the id file read-only
-chmod 0444 obc_id.txt
 
 # Set files
 #mkdir dags
@@ -82,7 +82,25 @@ fi
 #cd $OBC_CLIENT_PATH
 echo "Running Directory : " $(pwd)
 docker-compose up -d
-if [ $? -eq 1 ] ; then
+if [ $? -eq 0 ] ; then 
+	export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
+
+	export OBC_CLIENT_URL="http://$PUBLIC_IP:5000/$OBC_USER_ID"
+	echo -e "\033[38;2;0;255;0m\n\n\n Successful installation \n\n\n\033[0m"
+	echo -e "\033[38;2;0;255;0m Close tests \033[0m"
+	docker-compose down
+	echo -e "\n\n\n\n\n"
+	echo $OBC_CLIENT_URL | xsel -ib
+	echo -e "\033[38;2;0;255;0m**IMPORTANT**\033[0m"
+	echo -e "\033[38;2;0;255;100m
+	Copy this link below in OpenBioC Settings to confirm the connection: 
+	(Link have automatically copied)
+	\033[0m
+	"
+	echo -e "\033[48;2;0;255;0m
+	\033[38;2;0;0;0m$OBC_CLIENT_URL\033[0m
+	\033[0m"
+else
 #	echo "Subnet already in use..."
 #        echo "Remove networks"
 #	docker network prune
@@ -90,3 +108,4 @@ if [ $? -eq 1 ] ; then
 #        echo "service run test  code -> " $?
 	docker-compose down
 fi
+
