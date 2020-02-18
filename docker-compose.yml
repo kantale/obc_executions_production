@@ -32,9 +32,9 @@ services:
     container_name: executor_OBC_Client
 
   airflowserver:
-    image: puckel/docker-airflow:1.10.6
+    image: puckel/docker-airflow:1.10.8
     build:
-      context: https://github.com/puckel/docker-airflow.git#1.10.6
+      context: https://github.com/puckel/docker-airflow.git#1.10.8
       dockerfile: Dockerfile
       args:
         AIRFLOW_DEPS: gcp_api,s3
