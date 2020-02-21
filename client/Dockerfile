@@ -14,7 +14,8 @@ RUN pip install -r requirements.txt
 COPY * /code/
 
 RUN mkdir generated_dags
-
+RUN mkdir generated_dags/wf
+RUN mkdir generated_dags/tool
 
 
 CMD ["flask", "run"]

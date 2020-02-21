@@ -11,7 +11,7 @@ services:
     networks:
       main_net:
   restapi:
-    image: manoskoutoulakis/obc_client:latest
+    #image: manoskoutoulakis/obc_client:latest
     build:
       # Uncomment only for production purposes TODO (make another one compose)
       context: ./client
@@ -25,7 +25,7 @@ services:
     volumes:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
-      # Uncomment only for production purposes TODO (make another one compose)
+      # Uncomment only for production purposes 
       - ./client:/code
       - datavolume:/code/generated_dags
     ports:

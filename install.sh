@@ -29,8 +29,8 @@ echo -e "Client ID : \033[38;2;0;255;0m$OBC_USER_ID\033[0m"
 cd $OBC_CLIENT_PATH
 
 echo -e "Client ID for OpenBioC Server : \033[38;2;0;255;0m$OBC_USER_ID\033[0m"
-echo OBC_USER_ID=$OBC_USER_ID | tee .env
-
+export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
+echo -e OBC_USER_ID=$OBC_USER_ID"\n"PUBLIC_IP=$PUBLIC_IP >> .env 
 
 # Set files
 #mkdir dags
@@ -83,7 +83,6 @@ fi
 echo "Running Directory : " $(pwd)
 docker-compose up -d
 if [ $? -eq 0 ] ; then 
-	export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
 
 	export OBC_CLIENT_URL="http://$PUBLIC_IP:5000/$OBC_USER_ID"
 	echo -e "\033[38;2;0;255;0m\n\n\n Successful installation \n\n\n\033[0m"
