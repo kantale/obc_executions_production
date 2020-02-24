@@ -8,7 +8,6 @@ IMAGE=obc_client
 #ensure we are up to date
 git pull
 
-docker run --rm -v "$PWD":/client manoskoutoulakis/bump patch
 version=`cat VERSION`
 echo "version: $version"
 
