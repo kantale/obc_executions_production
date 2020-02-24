@@ -1,0 +1,8 @@
+#Backup files generated from editors
+*.swp
+*.env
+
+# suer the ** to exclude any level of subfolder
+
+**/client/curlexamples
+**/client/generated_dags
