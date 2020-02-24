@@ -1,4 +1,5 @@
 FROM python:3.7-alpine
+ADD VERSION .
 
 EXPOSE 5000
 
