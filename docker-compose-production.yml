@@ -39,11 +39,13 @@ services:
   airflowserver:
     image: puckel/docker-airflow:1.10.8
     build:
-      context: https://github.com/puckel/docker-airflow.git#1.10.8
+      context: ./DockerfileAirflow
       dockerfile: Dockerfile
       args:
         AIRFLOW_DEPS: gcp_api,s3
         PYTHON_DEPS: sqlalchemy==1.2.0
+    command: >
+      bash "mkdir /usr/local/airflow/WORK && mkdir /usr/local/airflow/TOOL && mkdir /usr/local/airflow/DATA"
     restart: always
     depends_on:
       - postgres

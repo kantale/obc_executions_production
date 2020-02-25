@@ -67,7 +67,7 @@ def get_full_path(filename):
     elif dag_typy == 'tool':
         return f"{dag_tl_directory}/{filename}"
 
-def generate_workflow_file(name,edit,instructions):
+def generate_workflow_file(workflow_id,name,edit,instructions):
     '''
     Get the data from request to generate the dag file
     name : The name of file to be generated
@@ -248,12 +248,12 @@ def get_tool_OBC_rest(tl_name, tl_edit):
     return dag_contents
 
 
-def get_workflow_OBC_rest(wf_name, wf_edit):
+def get_workflow_OBC_rest(callback,wf_name, wf_edit,workflow_id):
     '''
     Send GET request to OBC REST to get the dagfile
     RETURN dag File contents
     '''
-    response = requests.get(f'http://{OBC_server}:8200/platform/rest/workflows/{wf_name}/{wf_edit}/?dag=true')
+    response = requests.get(f'{callback}rest/workflows/{wf_name}/{wf_edit}/?dag=true&workflow_id={workflow_id}')
     dag_contents={}
     if response.status_code != 200:
         print(f"Error while retrieving data. ERROR_CODE : {response.status_code}")
@@ -266,7 +266,7 @@ def get_workflow_OBC_rest(wf_name, wf_edit):
     return dag_contents
 
 
-def dag_workflow_trigger(name,edit):
+def dag_workflow_trigger(workflow_id,name,edit):
     '''
     Trigger the dag from OpenBio
     Function starts using docker between containers which didn't work
@@ -283,7 +283,7 @@ def dag_workflow_trigger(name,edit):
     which communicate both airflow and OBC_client
     '''
     ret = {}
-    url = f'http://172.18.0.5:8080/api/experimental/dags/{name}__{edit}/dag_runs'
+    url = f'http://172.18.0.5:8080/api/experimental/dags/{workflow_id}/dag_runs'
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -360,6 +360,9 @@ def dag_trigger():
     name = data['name']
     edit = data['edit']
     work_type = data['type']
+    callback= data['callback']
+    workflow_id= data['workflow_id']
+    print(request.base_url)
     if work_type == 'tool':
         version = data['version']
         dag_contents= get_tool_OBC_rest(name,edit,version)
@@ -374,11 +377,11 @@ def dag_trigger():
             print('Dag not found')
             payload=dag_contents
     elif work_type == 'workflow':
-        dag_contents= get_workflow_OBC_rest(name,edit)
+        dag_contents= get_workflow_OBC_rest(callback,name,edit,workflow_id)
         try:
             if dag_contents['success']!='failed':
-                generate_workflow_file(name,edit,dag_contents['dag'])
-                payload['status']=dag_workflow_trigger(name,edit)
+                generate_workflow_file(workflow_id,name,edit,dag_contents['dag'])
+                payload['status']=dag_workflow_trigger(workflow_id,name,edit)
             else:
                 payload['status']='failed'
                 payload['reason']=dag_contents
@@ -391,4 +394,17 @@ def dag_trigger():
     return json.dumps(payload)
 
 
-    
+@app.route(f"/{os.environ['OBC_USER_ID']}/check", methods=['GET'])
+def get_status_of_workflow():
+    '''
+    Get dag status from airflow
+    Request using curl to get the status of running or finished dag:
+    curl -X GET \
+      http://< PUBLIC IP >:8080/api/experimental/dags/pca_plink_and_plot__1/dag_runs \
+      -H 'Cache-Control: no-cache' \
+      -H 'Content-Type: application/json' \
+      -d '{
+          "id":"bla bla"
+      }'
+
+    '''
