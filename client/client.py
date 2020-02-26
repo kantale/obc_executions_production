@@ -1,6 +1,6 @@
 import os
 import urllib
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file, send_from_directory, safe_join, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import json
@@ -256,16 +256,21 @@ def dag__trigger(id,name,edit):
         }
 
     payload={} # Future changes for scheduling workflow
-    effort = 0
-    while True:
-        effort += 1
-        print (f'Effort: {effort}')
+    # effort = 0
+    # while True:
+    #     effort += 1
+    #     print (f'Effort: {effort}')
+    #     response = requests.post(url,data=json.dumps(payload),headers=headers)
+    #     if not response.ok:
+    #         print ('Response error:', response.status_code)
+    #         print (json.dumps(response.json(), indent=4))
+    #         time.sleep(1)
+    #     else:
+    #         break
+    response = requests.post(url,data=json.dumps(payload),headers=headers)
+    while "error" in response.json():
         response = requests.post(url,data=json.dumps(payload),headers=headers)
-        if not response.ok:
-            print ('Response error:', response.status_code)
-            print (json.dumps(response.json(), indent=4))
-            time.sleep(1)
-        else:
+        if "error" not in response.json():
             break
 
     print("---> Response from airflow : ")
@@ -308,21 +313,22 @@ def run_wf():
     callback= data['callback']
     
     print(request.base_url)
-    if work_type == 'tool':
-        tool_id = data['tool_id']
-        version = data['version']
-        dag_contents= get_tool_OBC_rest(callback,name,edit,version)
-        try:
-            if dag_contents['success']!='failed':
-                generate_file(tool_id)
-                payload['status']=dag__trigger(tool_id,name,edit)
-            else:
-                payload['status']='failed'
-                payload['reason']=dag_contents
-        except KeyError:
-            print('Dag not found')
-            payload=dag_contents
-    elif work_type == 'workflow':
+    # if work_type == 'tool':
+    #     tool_id = data['tool_id']
+    #     version = data['version']
+    #     dag_contents= get_tool_OBC_rest(callback,name,edit,version)
+    #     try:
+    #         if dag_contents['success']!='failed':
+    #             generate_file(tool_id)
+    #             payload['status']=dag__trigger(tool_id,name,edit)
+    #         else:
+    #             payload['status']='failed'
+    #             payload['reason']=dag_contents
+    #     except KeyError:
+    #         print('Dag not found')
+    #         payload=dag_contents
+    # elif
+    if work_type == 'workflow':
         workflow_id = data['workflow_id']
         dag_contents = get_workflow_OBC_rest(callback,name,edit,workflow_id)
         try:
@@ -372,3 +378,11 @@ def get_status_of_workflow():
     print("---> Response from airflow : ")
     print(response.json())
     return response.json()
+
+
+
+@app.route('/test/download')
+def downloadFile ():
+    #For windows you need to use drive name [ex: F:/Example.pdf]
+    path = "README.md"
+    return send_file(path, as_attachment=True)
