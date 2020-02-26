@@ -11,7 +11,7 @@ services:
     networks:
       main_net:
   restapi:
-    #image: manoskoutoulakis/obc_client:latest
+    image: manoskoutoulakis/obc_client:latest
     build:
       # Uncomment only for production purposes TODO (make another one compose)
       context: ./client
@@ -37,15 +37,13 @@ services:
     container_name: OBC_client      
 
   airflowserver:
-    image: puckel/docker-airflow:1.10.8
+    image: manoskoutoulakis/docker-obc-airflow:1.10.9
     build:
-      context: ./DockerfileAirflow
+      context: https://github.com/manoskout/docker-obc-airflow.git
       dockerfile: Dockerfile
       args:
         AIRFLOW_DEPS: gcp_api,s3
         PYTHON_DEPS: sqlalchemy==1.2.0
-    command: >
-      bash "mkdir /usr/local/airflow/WORK && mkdir /usr/local/airflow/TOOL && mkdir /usr/local/airflow/DATA"
     restart: always
     depends_on:
       - postgres
@@ -56,7 +54,7 @@ services:
     volumes:
       - datavolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
-      #- ./logs:/usr/local/airflow/logs
+#      - ./logs:/usr/local/airflow/logs
       # Configuration File
       - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
       - /var/run/docker.sock:/var/run/docker.sock
@@ -71,8 +69,8 @@ services:
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
-      interval: 15s
-      timeout: 15s
+      interval: 5s
+      timeout: 5s
       retries: 3
     container_name: airflow
 volumes:
@@ -81,7 +79,7 @@ volumes:
 
 networks:
   # Communication between client and airflow restapi
-  # 172.18.0.4 --> client IP
+  # 172.18.0.4 --/usr/local/airflow> client IP
   # 172.18.0.5 --> airflow IP
   air_rest:
     driver: bridge

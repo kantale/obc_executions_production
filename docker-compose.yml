@@ -30,12 +30,12 @@ services:
       air_rest:
         ipv4_address: 172.18.0.4
       main_net:
-    container_name: executor_OBC_Client
+    container_name: executor_OBC
 
   airflowserver:
     image: manoskoutoulakis/docker-obc-airflow:1.10.9
     build:
-      context: https://github.com/manoskoutoulakis/docker-obc-airflow.git#1.10.9
+      context: https://github.com/manoskout/docker-obc-airflow.git
       dockerfile: Dockerfile
       args:
         AIRFLOW_DEPS: gcp_api,s3
@@ -51,7 +51,7 @@ services:
       # Volume which share data with client
       - dagvolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
-      #- ./logs:/usr/local/airflow/logs
+      - ./logs:/usr/local/airflow/logs
       # Configuration File
       - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
       - /var/run/docker.sock:/var/run/docker.sock
@@ -69,7 +69,7 @@ services:
       interval: 15s
       timeout: 15s
       retries: 3
-    container_name: executor_airflow
+    container_name: executor_airflow_runner
 
 volumes:
   # client-airflow dags volume

@@ -1,0 +1,503 @@
+[2020-02-25 13:43:07,153] {logging_mixin.py:112} INFO - [2020-02-25 13:43:07,153] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3284
+[2020-02-25 13:43:07,157] {scheduler_job.py:153} INFO - Started process (PID=3284) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:07,162] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:07,162] {logging_mixin.py:112} INFO - [2020-02-25 13:43:07,162] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:07,171] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:07,199] {logging_mixin.py:112} INFO - [2020-02-25 13:43:07,199] {dag.py:1485} INFO - Creating ORM DAG for pouli
+[2020-02-25 13:43:07,223] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.066 seconds
+[2020-02-25 13:43:11,245] {logging_mixin.py:112} INFO - [2020-02-25 13:43:11,244] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3324
+[2020-02-25 13:43:11,250] {scheduler_job.py:153} INFO - Started process (PID=3324) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:11,255] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:11,256] {logging_mixin.py:112} INFO - [2020-02-25 13:43:11,256] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:11,267] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:11,331] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.081 seconds
+[2020-02-25 13:43:15,320] {logging_mixin.py:112} INFO - [2020-02-25 13:43:15,320] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3364
+[2020-02-25 13:43:15,326] {scheduler_job.py:153} INFO - Started process (PID=3364) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:15,332] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:15,334] {logging_mixin.py:112} INFO - [2020-02-25 13:43:15,332] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:15,342] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:15,406] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.080 seconds
+[2020-02-25 13:43:19,408] {logging_mixin.py:112} INFO - [2020-02-25 13:43:19,407] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3409
+[2020-02-25 13:43:19,412] {scheduler_job.py:153} INFO - Started process (PID=3409) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:19,418] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:19,419] {logging_mixin.py:112} INFO - [2020-02-25 13:43:19,419] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:19,426] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:19,480] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.068 seconds
+[2020-02-25 13:43:23,497] {logging_mixin.py:112} INFO - [2020-02-25 13:43:23,496] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3450
+[2020-02-25 13:43:23,504] {scheduler_job.py:153} INFO - Started process (PID=3450) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:23,510] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:23,511] {logging_mixin.py:112} INFO - [2020-02-25 13:43:23,511] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:23,520] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:23,606] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.102 seconds
+[2020-02-25 13:43:27,582] {logging_mixin.py:112} INFO - [2020-02-25 13:43:27,581] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3490
+[2020-02-25 13:43:27,588] {scheduler_job.py:153} INFO - Started process (PID=3490) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:27,595] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:27,595] {logging_mixin.py:112} INFO - [2020-02-25 13:43:27,595] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:27,603] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:27,662] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.074 seconds
+[2020-02-25 13:43:31,673] {logging_mixin.py:112} INFO - [2020-02-25 13:43:31,672] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3530
+[2020-02-25 13:43:31,678] {scheduler_job.py:153} INFO - Started process (PID=3530) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:31,683] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:31,684] {logging_mixin.py:112} INFO - [2020-02-25 13:43:31,683] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:31,691] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:31,745] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.067 seconds
+[2020-02-25 13:43:35,751] {logging_mixin.py:112} INFO - [2020-02-25 13:43:35,750] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3575
+[2020-02-25 13:43:35,755] {scheduler_job.py:153} INFO - Started process (PID=3575) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:35,760] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:35,761] {logging_mixin.py:112} INFO - [2020-02-25 13:43:35,761] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:35,769] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:35,820] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.065 seconds
+[2020-02-25 13:43:39,851] {logging_mixin.py:112} INFO - [2020-02-25 13:43:39,851] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3615
+[2020-02-25 13:43:39,856] {scheduler_job.py:153} INFO - Started process (PID=3615) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:39,861] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:39,862] {logging_mixin.py:112} INFO - [2020-02-25 13:43:39,862] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:39,871] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:39,932] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.076 seconds
+[2020-02-25 13:43:43,931] {logging_mixin.py:112} INFO - [2020-02-25 13:43:43,930] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3655
+[2020-02-25 13:43:43,936] {scheduler_job.py:153} INFO - Started process (PID=3655) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:43,941] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:43,941] {logging_mixin.py:112} INFO - [2020-02-25 13:43:43,941] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:43,949] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:44,004] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.068 seconds
+[2020-02-25 13:43:48,010] {logging_mixin.py:112} INFO - [2020-02-25 13:43:48,009] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3695
+[2020-02-25 13:43:48,014] {scheduler_job.py:153} INFO - Started process (PID=3695) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:48,019] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:48,020] {logging_mixin.py:112} INFO - [2020-02-25 13:43:48,020] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:48,027] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:48,094] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.080 seconds
+[2020-02-25 13:43:52,111] {logging_mixin.py:112} INFO - [2020-02-25 13:43:52,111] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3741
+[2020-02-25 13:43:52,116] {scheduler_job.py:153} INFO - Started process (PID=3741) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:52,121] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:52,122] {logging_mixin.py:112} INFO - [2020-02-25 13:43:52,122] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:52,131] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:52,194] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.078 seconds
+[2020-02-25 13:43:56,209] {logging_mixin.py:112} INFO - [2020-02-25 13:43:56,208] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3782
+[2020-02-25 13:43:56,216] {scheduler_job.py:153} INFO - Started process (PID=3782) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:56,221] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:43:56,221] {logging_mixin.py:112} INFO - [2020-02-25 13:43:56,221] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:56,232] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:43:56,305] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.089 seconds
+[2020-02-25 13:44:00,300] {logging_mixin.py:112} INFO - [2020-02-25 13:44:00,299] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3822
+[2020-02-25 13:44:00,305] {scheduler_job.py:153} INFO - Started process (PID=3822) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:00,311] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:00,311] {logging_mixin.py:112} INFO - [2020-02-25 13:44:00,311] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:00,324] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:00,374] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.069 seconds
+[2020-02-25 13:44:04,419] {logging_mixin.py:112} INFO - [2020-02-25 13:44:04,419] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3862
+[2020-02-25 13:44:04,424] {scheduler_job.py:153} INFO - Started process (PID=3862) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:04,429] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:04,430] {logging_mixin.py:112} INFO - [2020-02-25 13:44:04,430] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:04,442] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:04,491] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.067 seconds
+[2020-02-25 13:44:08,470] {logging_mixin.py:112} INFO - [2020-02-25 13:44:08,470] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3909
+[2020-02-25 13:44:08,475] {scheduler_job.py:153} INFO - Started process (PID=3909) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:08,480] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:08,480] {logging_mixin.py:112} INFO - [2020-02-25 13:44:08,480] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:08,493] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:08,548] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.073 seconds
+[2020-02-25 13:44:12,566] {logging_mixin.py:112} INFO - [2020-02-25 13:44:12,565] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3949
+[2020-02-25 13:44:12,571] {scheduler_job.py:153} INFO - Started process (PID=3949) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:12,577] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:12,578] {logging_mixin.py:112} INFO - [2020-02-25 13:44:12,578] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:12,592] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:12,644] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.072 seconds
+[2020-02-25 13:44:16,643] {logging_mixin.py:112} INFO - [2020-02-25 13:44:16,643] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3989
+[2020-02-25 13:44:16,648] {scheduler_job.py:153} INFO - Started process (PID=3989) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:16,654] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:16,655] {logging_mixin.py:112} INFO - [2020-02-25 13:44:16,655] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:16,668] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:16,725] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.077 seconds
+[2020-02-25 13:44:20,733] {logging_mixin.py:112} INFO - [2020-02-25 13:44:20,732] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4034
+[2020-02-25 13:44:20,738] {scheduler_job.py:153} INFO - Started process (PID=4034) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:20,749] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:20,750] {logging_mixin.py:112} INFO - [2020-02-25 13:44:20,750] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:20,759] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:20,817] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.079 seconds
+[2020-02-25 13:44:24,813] {logging_mixin.py:112} INFO - [2020-02-25 13:44:24,813] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4074
+[2020-02-25 13:44:24,819] {scheduler_job.py:153} INFO - Started process (PID=4074) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:24,831] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:24,832] {logging_mixin.py:112} INFO - [2020-02-25 13:44:24,832] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:24,841] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:24,899] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.080 seconds
+[2020-02-25 13:44:28,896] {logging_mixin.py:112} INFO - [2020-02-25 13:44:28,895] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4115
+[2020-02-25 13:44:28,906] {scheduler_job.py:153} INFO - Started process (PID=4115) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:28,911] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:28,912] {logging_mixin.py:112} INFO - [2020-02-25 13:44:28,911] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:28,921] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:28,985] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.079 seconds
+[2020-02-25 13:44:33,012] {logging_mixin.py:112} INFO - [2020-02-25 13:44:33,012] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4155
+[2020-02-25 13:44:33,020] {scheduler_job.py:153} INFO - Started process (PID=4155) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:33,026] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:33,027] {logging_mixin.py:112} INFO - [2020-02-25 13:44:33,026] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:33,037] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:33,116] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.096 seconds
+[2020-02-25 13:44:37,102] {logging_mixin.py:112} INFO - [2020-02-25 13:44:37,102] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4203
+[2020-02-25 13:44:37,108] {scheduler_job.py:153} INFO - Started process (PID=4203) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:37,113] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:37,113] {logging_mixin.py:112} INFO - [2020-02-25 13:44:37,113] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:37,121] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:37,173] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.065 seconds
+[2020-02-25 13:44:41,202] {logging_mixin.py:112} INFO - [2020-02-25 13:44:41,201] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4243
+[2020-02-25 13:44:41,208] {scheduler_job.py:153} INFO - Started process (PID=4243) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:41,215] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:41,215] {logging_mixin.py:112} INFO - [2020-02-25 13:44:41,215] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:41,224] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:41,296] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.089 seconds
+[2020-02-25 13:44:45,276] {logging_mixin.py:112} INFO - [2020-02-25 13:44:45,276] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4283
+[2020-02-25 13:44:45,282] {scheduler_job.py:153} INFO - Started process (PID=4283) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:45,288] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:45,289] {logging_mixin.py:112} INFO - [2020-02-25 13:44:45,289] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:45,298] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:45,373] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.091 seconds
+[2020-02-25 13:44:49,368] {logging_mixin.py:112} INFO - [2020-02-25 13:44:49,367] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4323
+[2020-02-25 13:44:49,372] {scheduler_job.py:153} INFO - Started process (PID=4323) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:49,377] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:49,377] {logging_mixin.py:112} INFO - [2020-02-25 13:44:49,377] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:49,385] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:49,470] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.094 seconds
+[2020-02-25 13:44:53,450] {logging_mixin.py:112} INFO - [2020-02-25 13:44:53,449] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4370
+[2020-02-25 13:44:53,455] {scheduler_job.py:153} INFO - Started process (PID=4370) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:53,460] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:53,460] {logging_mixin.py:112} INFO - [2020-02-25 13:44:53,460] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:53,468] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:53,518] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.063 seconds
+[2020-02-25 13:44:57,531] {logging_mixin.py:112} INFO - [2020-02-25 13:44:57,530] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4410
+[2020-02-25 13:44:57,535] {scheduler_job.py:153} INFO - Started process (PID=4410) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:57,541] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:44:57,543] {logging_mixin.py:112} INFO - [2020-02-25 13:44:57,542] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:57,551] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:44:57,609] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.073 seconds
+[2020-02-25 13:45:01,619] {logging_mixin.py:112} INFO - [2020-02-25 13:45:01,618] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4451
+[2020-02-25 13:45:01,624] {scheduler_job.py:153} INFO - Started process (PID=4451) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:01,630] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:01,631] {logging_mixin.py:112} INFO - [2020-02-25 13:45:01,631] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:01,640] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:01,700] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.076 seconds
+[2020-02-25 13:45:05,702] {logging_mixin.py:112} INFO - [2020-02-25 13:45:05,701] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4491
+[2020-02-25 13:45:05,706] {scheduler_job.py:153} INFO - Started process (PID=4491) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:05,711] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:05,712] {logging_mixin.py:112} INFO - [2020-02-25 13:45:05,711] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:05,725] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:05,778] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.071 seconds
+[2020-02-25 13:45:09,777] {logging_mixin.py:112} INFO - [2020-02-25 13:45:09,777] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4536
+[2020-02-25 13:45:09,781] {scheduler_job.py:153} INFO - Started process (PID=4536) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:09,785] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:09,786] {logging_mixin.py:112} INFO - [2020-02-25 13:45:09,786] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:09,794] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:09,849] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.068 seconds
+[2020-02-25 13:45:13,875] {logging_mixin.py:112} INFO - [2020-02-25 13:45:13,874] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4576
+[2020-02-25 13:45:13,880] {scheduler_job.py:153} INFO - Started process (PID=4576) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:13,885] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:13,885] {logging_mixin.py:112} INFO - [2020-02-25 13:45:13,885] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:13,894] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:13,948] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.068 seconds
+[2020-02-25 13:45:17,956] {logging_mixin.py:112} INFO - [2020-02-25 13:45:17,955] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4616
+[2020-02-25 13:45:17,961] {scheduler_job.py:153} INFO - Started process (PID=4616) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:17,966] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:17,967] {logging_mixin.py:112} INFO - [2020-02-25 13:45:17,967] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:17,977] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:18,038] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.077 seconds
+[2020-02-25 13:45:22,064] {logging_mixin.py:112} INFO - [2020-02-25 13:45:22,063] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4656
+[2020-02-25 13:45:22,072] {scheduler_job.py:153} INFO - Started process (PID=4656) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:22,089] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:22,089] {logging_mixin.py:112} INFO - [2020-02-25 13:45:22,089] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:22,104] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:22,179] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.107 seconds
+[2020-02-25 13:45:26,123] {logging_mixin.py:112} INFO - [2020-02-25 13:45:26,123] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4701
+[2020-02-25 13:45:26,128] {scheduler_job.py:153} INFO - Started process (PID=4701) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:26,134] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:26,134] {logging_mixin.py:112} INFO - [2020-02-25 13:45:26,134] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:26,141] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:26,190] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.062 seconds
+[2020-02-25 13:45:30,202] {logging_mixin.py:112} INFO - [2020-02-25 13:45:30,201] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4741
+[2020-02-25 13:45:30,207] {scheduler_job.py:153} INFO - Started process (PID=4741) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:30,213] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:30,213] {logging_mixin.py:112} INFO - [2020-02-25 13:45:30,213] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:30,220] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:30,273] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.066 seconds
+[2020-02-25 13:45:34,299] {logging_mixin.py:112} INFO - [2020-02-25 13:45:34,298] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4782
+[2020-02-25 13:45:34,303] {scheduler_job.py:153} INFO - Started process (PID=4782) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:34,309] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:34,309] {logging_mixin.py:112} INFO - [2020-02-25 13:45:34,309] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:34,316] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:34,366] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.063 seconds
+[2020-02-25 13:45:38,378] {logging_mixin.py:112} INFO - [2020-02-25 13:45:38,377] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4828
+[2020-02-25 13:45:38,383] {scheduler_job.py:153} INFO - Started process (PID=4828) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:38,389] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:38,390] {logging_mixin.py:112} INFO - [2020-02-25 13:45:38,390] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:38,399] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:38,457] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.074 seconds
+[2020-02-25 13:45:42,475] {logging_mixin.py:112} INFO - [2020-02-25 13:45:42,474] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4868
+[2020-02-25 13:45:42,481] {scheduler_job.py:153} INFO - Started process (PID=4868) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:42,487] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:42,488] {logging_mixin.py:112} INFO - [2020-02-25 13:45:42,487] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:42,497] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:42,557] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.076 seconds
+[2020-02-25 13:45:46,562] {logging_mixin.py:112} INFO - [2020-02-25 13:45:46,561] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4908
+[2020-02-25 13:45:46,568] {scheduler_job.py:153} INFO - Started process (PID=4908) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:46,573] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:46,574] {logging_mixin.py:112} INFO - [2020-02-25 13:45:46,574] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:46,584] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:46,646] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.079 seconds
+[2020-02-25 13:45:50,638] {logging_mixin.py:112} INFO - [2020-02-25 13:45:50,638] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4948
+[2020-02-25 13:45:50,644] {scheduler_job.py:153} INFO - Started process (PID=4948) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:50,649] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:50,650] {logging_mixin.py:112} INFO - [2020-02-25 13:45:50,649] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:50,657] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:50,706] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.062 seconds
+[2020-02-25 13:45:54,733] {logging_mixin.py:112} INFO - [2020-02-25 13:45:54,732] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=4993
+[2020-02-25 13:45:54,738] {scheduler_job.py:153} INFO - Started process (PID=4993) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:54,743] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:54,744] {logging_mixin.py:112} INFO - [2020-02-25 13:45:54,744] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:54,752] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:54,804] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.066 seconds
+[2020-02-25 13:45:58,807] {logging_mixin.py:112} INFO - [2020-02-25 13:45:58,806] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5033
+[2020-02-25 13:45:58,813] {scheduler_job.py:153} INFO - Started process (PID=5033) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:58,818] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:45:58,818] {logging_mixin.py:112} INFO - [2020-02-25 13:45:58,818] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:58,826] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:45:58,879] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.066 seconds
+[2020-02-25 13:46:02,900] {logging_mixin.py:112} INFO - [2020-02-25 13:46:02,899] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5074
+[2020-02-25 13:46:02,905] {scheduler_job.py:153} INFO - Started process (PID=5074) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:02,909] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:02,910] {logging_mixin.py:112} INFO - [2020-02-25 13:46:02,910] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:02,919] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:02,982] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.078 seconds
+[2020-02-25 13:46:06,979] {logging_mixin.py:112} INFO - [2020-02-25 13:46:06,979] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5114
+[2020-02-25 13:46:06,983] {scheduler_job.py:153} INFO - Started process (PID=5114) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:06,987] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:06,988] {logging_mixin.py:112} INFO - [2020-02-25 13:46:06,988] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:06,995] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:07,051] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.068 seconds
+[2020-02-25 13:46:11,084] {logging_mixin.py:112} INFO - [2020-02-25 13:46:11,083] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5159
+[2020-02-25 13:46:11,091] {scheduler_job.py:153} INFO - Started process (PID=5159) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:11,099] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:11,100] {logging_mixin.py:112} INFO - [2020-02-25 13:46:11,099] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:11,112] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:11,219] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.128 seconds
+[2020-02-25 13:46:15,164] {logging_mixin.py:112} INFO - [2020-02-25 13:46:15,164] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5199
+[2020-02-25 13:46:15,168] {scheduler_job.py:153} INFO - Started process (PID=5199) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:15,174] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:15,174] {logging_mixin.py:112} INFO - [2020-02-25 13:46:15,174] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:15,182] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:15,235] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.067 seconds
+[2020-02-25 13:46:19,248] {logging_mixin.py:112} INFO - [2020-02-25 13:46:19,247] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5239
+[2020-02-25 13:46:19,254] {scheduler_job.py:153} INFO - Started process (PID=5239) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:19,259] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:19,259] {logging_mixin.py:112} INFO - [2020-02-25 13:46:19,259] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:19,268] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:19,341] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:19,349] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:43:07+00:00: manual__2020-02-25T13:43:07+00:00, externally triggered: True>
+[2020-02-25 13:46:19,390] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:19,399] {scheduler_job.py:1634} INFO - Creating / updating <TaskInstance: pouli.step__main_step__test__1 2020-02-25 13:43:07+00:00 [scheduled]> in ORM
+[2020-02-25 13:46:19,413] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.159 seconds
+[2020-02-25 13:46:23,384] {logging_mixin.py:112} INFO - [2020-02-25 13:46:23,383] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5280
+[2020-02-25 13:46:23,400] {scheduler_job.py:153} INFO - Started process (PID=5280) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:23,413] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:23,418] {logging_mixin.py:112} INFO - [2020-02-25 13:46:23,418] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:23,437] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:23,675] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:23,694] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:43:07+00:00: manual__2020-02-25T13:43:07+00:00, externally triggered: True>
+[2020-02-25 13:46:23,770] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:23,779] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.379 seconds
+[2020-02-25 13:46:27,456] {logging_mixin.py:112} INFO - [2020-02-25 13:46:27,456] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5330
+[2020-02-25 13:46:27,462] {scheduler_job.py:153} INFO - Started process (PID=5330) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:27,469] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:27,471] {logging_mixin.py:112} INFO - [2020-02-25 13:46:27,470] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:27,495] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:27,609] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:27,621] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:43:07+00:00: manual__2020-02-25T13:43:07+00:00, externally triggered: True>
+[2020-02-25 13:46:27,682] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:27,691] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.229 seconds
+[2020-02-25 13:46:31,580] {logging_mixin.py:112} INFO - [2020-02-25 13:46:31,580] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5384
+[2020-02-25 13:46:31,586] {scheduler_job.py:153} INFO - Started process (PID=5384) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:31,592] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:31,593] {logging_mixin.py:112} INFO - [2020-02-25 13:46:31,593] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:31,603] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:31,671] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:31,681] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:43:07+00:00: manual__2020-02-25T13:43:07+00:00, externally triggered: True>
+[2020-02-25 13:46:31,705] {logging_mixin.py:112} INFO - [2020-02-25 13:46:31,705] {dagrun.py:309} INFO - Marking run <DagRun pouli @ 2020-02-25 13:43:07+00:00: manual__2020-02-25T13:43:07+00:00, externally triggered: True> failed
+[2020-02-25 13:46:31,712] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:46:28.342158+00:00: manual__2020-02-25T13:46:28.342158+00:00, externally triggered: True>
+[2020-02-25 13:46:31,744] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:31,753] {scheduler_job.py:1634} INFO - Creating / updating <TaskInstance: pouli.step__main_step__test__1 2020-02-25 13:46:28.342158+00:00 [scheduled]> in ORM
+[2020-02-25 13:46:31,771] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.185 seconds
+[2020-02-25 13:46:35,737] {logging_mixin.py:112} INFO - [2020-02-25 13:46:35,733] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5426
+[2020-02-25 13:46:35,753] {scheduler_job.py:153} INFO - Started process (PID=5426) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:35,775] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:35,776] {logging_mixin.py:112} INFO - [2020-02-25 13:46:35,776] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:35,809] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:35,958] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:35,972] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:46:28.342158+00:00: manual__2020-02-25T13:46:28.342158+00:00, externally triggered: True>
+[2020-02-25 13:46:36,024] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:36,032] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.279 seconds
+[2020-02-25 13:46:39,845] {logging_mixin.py:112} INFO - [2020-02-25 13:46:39,844] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5471
+[2020-02-25 13:46:39,860] {scheduler_job.py:153} INFO - Started process (PID=5471) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:39,875] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:39,876] {logging_mixin.py:112} INFO - [2020-02-25 13:46:39,875] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:39,897] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:40,148] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:40,177] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:46:28.342158+00:00: manual__2020-02-25T13:46:28.342158+00:00, externally triggered: True>
+[2020-02-25 13:46:40,308] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:40,350] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.490 seconds
+[2020-02-25 13:46:43,934] {logging_mixin.py:112} INFO - [2020-02-25 13:46:43,934] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5530
+[2020-02-25 13:46:43,940] {scheduler_job.py:153} INFO - Started process (PID=5530) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:43,948] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:43,948] {logging_mixin.py:112} INFO - [2020-02-25 13:46:43,948] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:43,957] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:44,040] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:44,068] {scheduler_job.py:757} INFO - Examining DAG run <DagRun pouli @ 2020-02-25 13:46:28.342158+00:00: manual__2020-02-25T13:46:28.342158+00:00, externally triggered: True>
+[2020-02-25 13:46:44,109] {logging_mixin.py:112} INFO - [2020-02-25 13:46:44,109] {dagrun.py:309} INFO - Marking run <DagRun pouli @ 2020-02-25 13:46:28.342158+00:00: manual__2020-02-25T13:46:28.342158+00:00, externally triggered: True> failed
+[2020-02-25 13:46:44,117] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:44,124] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.184 seconds
+[2020-02-25 13:46:48,023] {logging_mixin.py:112} INFO - [2020-02-25 13:46:48,023] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5570
+[2020-02-25 13:46:48,028] {scheduler_job.py:153} INFO - Started process (PID=5570) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:48,035] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:48,038] {logging_mixin.py:112} INFO - [2020-02-25 13:46:48,038] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:48,063] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:48,194] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:48,215] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:48,223] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.195 seconds
+[2020-02-25 13:46:52,119] {logging_mixin.py:112} INFO - [2020-02-25 13:46:52,119] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5610
+[2020-02-25 13:46:52,124] {scheduler_job.py:153} INFO - Started process (PID=5610) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:52,130] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:52,132] {logging_mixin.py:112} INFO - [2020-02-25 13:46:52,132] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:52,141] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:52,209] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:52,220] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:52,227] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.103 seconds
+[2020-02-25 13:46:56,219] {logging_mixin.py:112} INFO - [2020-02-25 13:46:56,219] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5656
+[2020-02-25 13:46:56,224] {scheduler_job.py:153} INFO - Started process (PID=5656) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:56,228] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:46:56,229] {logging_mixin.py:112} INFO - [2020-02-25 13:46:56,229] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:56,237] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:46:56,312] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:46:56,322] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:46:56,328] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.105 seconds
+[2020-02-25 13:47:00,304] {logging_mixin.py:112} INFO - [2020-02-25 13:47:00,303] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5696
+[2020-02-25 13:47:00,309] {scheduler_job.py:153} INFO - Started process (PID=5696) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:00,313] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:00,314] {logging_mixin.py:112} INFO - [2020-02-25 13:47:00,314] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:00,321] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:00,385] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:00,397] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:00,404] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.095 seconds
+[2020-02-25 13:47:04,395] {logging_mixin.py:112} INFO - [2020-02-25 13:47:04,394] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5736
+[2020-02-25 13:47:04,399] {scheduler_job.py:153} INFO - Started process (PID=5736) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:04,404] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:04,405] {logging_mixin.py:112} INFO - [2020-02-25 13:47:04,405] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:04,415] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:04,487] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:04,497] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:04,502] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.103 seconds
+[2020-02-25 13:47:08,473] {logging_mixin.py:112} INFO - [2020-02-25 13:47:08,472] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5777
+[2020-02-25 13:47:08,477] {scheduler_job.py:153} INFO - Started process (PID=5777) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:08,483] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:08,483] {logging_mixin.py:112} INFO - [2020-02-25 13:47:08,483] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:08,493] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:08,579] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:08,589] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:08,596] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.118 seconds
+[2020-02-25 13:47:12,562] {logging_mixin.py:112} INFO - [2020-02-25 13:47:12,561] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5822
+[2020-02-25 13:47:12,568] {scheduler_job.py:153} INFO - Started process (PID=5822) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:12,574] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:12,575] {logging_mixin.py:112} INFO - [2020-02-25 13:47:12,575] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:12,592] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:12,752] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:12,765] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:12,771] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.204 seconds
+[2020-02-25 13:47:16,670] {logging_mixin.py:112} INFO - [2020-02-25 13:47:16,669] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5862
+[2020-02-25 13:47:16,675] {scheduler_job.py:153} INFO - Started process (PID=5862) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:16,680] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:16,681] {logging_mixin.py:112} INFO - [2020-02-25 13:47:16,681] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:16,689] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:16,759] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:16,770] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:16,777] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.102 seconds
+[2020-02-25 13:47:20,744] {logging_mixin.py:112} INFO - [2020-02-25 13:47:20,743] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5902
+[2020-02-25 13:47:20,749] {scheduler_job.py:153} INFO - Started process (PID=5902) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:20,755] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:20,755] {logging_mixin.py:112} INFO - [2020-02-25 13:47:20,755] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:20,764] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:20,842] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:20,851] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:20,859] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.109 seconds
+[2020-02-25 13:47:24,826] {logging_mixin.py:112} INFO - [2020-02-25 13:47:24,826] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5942
+[2020-02-25 13:47:24,831] {scheduler_job.py:153} INFO - Started process (PID=5942) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:24,837] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:24,838] {logging_mixin.py:112} INFO - [2020-02-25 13:47:24,838] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:24,847] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:24,943] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:24,954] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:24,960] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.129 seconds
+[2020-02-25 13:47:28,914] {logging_mixin.py:112} INFO - [2020-02-25 13:47:28,913] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=5994
+[2020-02-25 13:47:28,919] {scheduler_job.py:153} INFO - Started process (PID=5994) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:28,925] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:28,926] {logging_mixin.py:112} INFO - [2020-02-25 13:47:28,925] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:28,935] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:29,005] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:29,017] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:29,024] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.105 seconds
+[2020-02-25 13:47:32,991] {logging_mixin.py:112} INFO - [2020-02-25 13:47:32,991] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6034
+[2020-02-25 13:47:32,997] {scheduler_job.py:153} INFO - Started process (PID=6034) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:33,002] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:33,003] {logging_mixin.py:112} INFO - [2020-02-25 13:47:33,003] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:33,012] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:33,082] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:33,091] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:33,098] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.102 seconds
+[2020-02-25 13:47:37,096] {logging_mixin.py:112} INFO - [2020-02-25 13:47:37,095] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6074
+[2020-02-25 13:47:37,100] {scheduler_job.py:153} INFO - Started process (PID=6074) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:37,104] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:37,105] {logging_mixin.py:112} INFO - [2020-02-25 13:47:37,105] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:37,114] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:37,183] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:37,193] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:37,199] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.099 seconds
+[2020-02-25 13:47:41,173] {logging_mixin.py:112} INFO - [2020-02-25 13:47:41,173] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6115
+[2020-02-25 13:47:41,178] {scheduler_job.py:153} INFO - Started process (PID=6115) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:41,183] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:41,184] {logging_mixin.py:112} INFO - [2020-02-25 13:47:41,184] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:41,193] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:41,258] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:41,269] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:41,276] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.097 seconds
+[2020-02-25 13:47:45,269] {logging_mixin.py:112} INFO - [2020-02-25 13:47:45,269] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6161
+[2020-02-25 13:47:45,273] {scheduler_job.py:153} INFO - Started process (PID=6161) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:45,280] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:45,280] {logging_mixin.py:112} INFO - [2020-02-25 13:47:45,280] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:45,287] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:45,350] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:45,360] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:45,367] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.093 seconds
+[2020-02-25 13:47:49,352] {logging_mixin.py:112} INFO - [2020-02-25 13:47:49,352] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6202
+[2020-02-25 13:47:49,356] {scheduler_job.py:153} INFO - Started process (PID=6202) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:49,362] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:49,363] {logging_mixin.py:112} INFO - [2020-02-25 13:47:49,363] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:49,370] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:49,436] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:49,444] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:49,450] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.094 seconds
+[2020-02-25 13:47:53,426] {logging_mixin.py:112} INFO - [2020-02-25 13:47:53,425] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6242
+[2020-02-25 13:47:53,430] {scheduler_job.py:153} INFO - Started process (PID=6242) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:53,436] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:53,437] {logging_mixin.py:112} INFO - [2020-02-25 13:47:53,437] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:53,444] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:53,515] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:53,526] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:53,536] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.106 seconds
+[2020-02-25 13:47:57,514] {logging_mixin.py:112} INFO - [2020-02-25 13:47:57,513] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6282
+[2020-02-25 13:47:57,519] {scheduler_job.py:153} INFO - Started process (PID=6282) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:57,529] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:47:57,530] {logging_mixin.py:112} INFO - [2020-02-25 13:47:57,530] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:57,538] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:47:57,605] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:47:57,616] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:47:57,621] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.102 seconds
+[2020-02-25 13:48:01,614] {logging_mixin.py:112} INFO - [2020-02-25 13:48:01,614] {settings.py:253} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=6328
+[2020-02-25 13:48:01,619] {scheduler_job.py:153} INFO - Started process (PID=6328) to work on /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:48:01,626] {scheduler_job.py:1560} INFO - Processing file /usr/local/airflow/dags/pouli.py for tasks to queue
+[2020-02-25 13:48:01,627] {logging_mixin.py:112} INFO - [2020-02-25 13:48:01,626] {dagbag.py:403} INFO - Filling up the DagBag from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:48:01,635] {scheduler_job.py:1572} INFO - DAG(s) dict_keys(['pouli']) retrieved from /usr/local/airflow/dags/pouli.py
+[2020-02-25 13:48:01,706] {scheduler_job.py:1282} INFO - Processing pouli
+[2020-02-25 13:48:01,717] {scheduler_job.py:446} INFO - Skipping SLA check for <DAG: pouli> because no tasks in DAG have SLAs
+[2020-02-25 13:48:01,724] {scheduler_job.py:161} INFO - Processing /usr/local/airflow/dags/pouli.py took 0.105 seconds
