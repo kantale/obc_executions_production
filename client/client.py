@@ -35,8 +35,8 @@ OBC_client=""
 
 dag_directory = "generated_dags/"
 #not fixed we use tha same dir for tool and workflows
-dag_wf_directory = "generated_dags/wf/"
-dag_tl_directory = "generated_dags/tool/"
+# dag_wf_directory = "generated_dags/wf/"
+# dag_tl_directory = "generated_dags/tool/"
 
 
 def create_filename(id):
@@ -112,48 +112,6 @@ def generate_file(id,instructions):
 #         ret['generate_date'] = None
 #         ret['msg']= "The file does not exist"
 #     return ret
-
-# @app.route(f"/{os.environ['OBC_USER_ID']}/generate_dag", methods=['POST'])
-# def generate_dag():
-#     '''
-#     NOT USED YET
-#     Get request from openBio platform
-#     which contains the file name, dag instructions
-#     request data :
-#     filename:blah,
-#     bash:blah,
-#     owner:blah,
-
-#     response:
-#         generate_date: blah
-#         owner: blah
-#         status:untriggered
-#     '''
-#     # Parse data json to dict
-#     gen_result={}
-#     data = json.loads(request.get_data().decode())     
-#     filename = data['filename']
-#     file_content = data['bash']
-#     owner = data['owner']
-#     pyfile = urllib.parse.unquote(file_content)
-#     gen_result['date'] = generate_file(filename,pyfile)
-#     gen_result['owner']= owner
-#     gen_result['status']="untriggered"
-#     return gen_result
-
-# @app.route(f"/{os.environ['OBC_USER_ID']}/update_dag", methods=['PUT'])
-# def update_dag():
-#     '''
-#     NOT USED YET
-#     '''
-#     data= json.loads(request.get_data().decode())
-#     filename = f"{data['filename']}.py"
-#     owner = data['owner']
-#     pyfile = urllib.parse.unquote(filename,pyfile)
-#     up_result["date"] = generated_dag_file(filename,pyfile) 
-#     up_result['owner']=owner
-#     up_result['status']="untriggered"
-#     return up_result
 
 
 # @app.route(f"/{os.environ['OBC_USER_ID']}/delete_dag", methods=['DELETE','GET'])
@@ -256,22 +214,18 @@ def dag__trigger(id,name,edit):
         }
 
     payload={} # Future changes for scheduling workflow
-    # effort = 0
-    # while True:
-    #     effort += 1
-    #     print (f'Effort: {effort}')
-    #     response = requests.post(url,data=json.dumps(payload),headers=headers)
-    #     if not response.ok:
-    #         print ('Response error:', response.status_code)
-    #         print (json.dumps(response.json(), indent=4))
-    #         time.sleep(1)
-    #     else:
-    #         break
-    response = requests.post(url,data=json.dumps(payload),headers=headers)
-    while "error" in response.json():
+    effort = 0
+    while True:
+        effort += 1
+        print (f'Effort: {effort}')
         response = requests.post(url,data=json.dumps(payload),headers=headers)
-        if "error" not in response.json():
+        if not response.ok:
+            print ('Response error:', response.status_code)
+            print (json.dumps(response.json(), indent=4))
+            time.sleep(1)
+        else:
             break
+
 
     print("---> Response from airflow : ")
     print(response.json())
@@ -313,22 +267,21 @@ def run_wf():
     callback= data['callback']
     
     print(request.base_url)
-    # if work_type == 'tool':
-    #     tool_id = data['tool_id']
-    #     version = data['version']
-    #     dag_contents= get_tool_OBC_rest(callback,name,edit,version)
-    #     try:
-    #         if dag_contents['success']!='failed':
-    #             generate_file(tool_id)
-    #             payload['status']=dag__trigger(tool_id,name,edit)
-    #         else:
-    #             payload['status']='failed'
-    #             payload['reason']=dag_contents
-    #     except KeyError:
-    #         print('Dag not found')
-    #         payload=dag_contents
-    # elif
-    if work_type == 'workflow':
+    if work_type == 'tool':
+        tool_id = data['tool_id']
+        version = data['version']
+        dag_contents= get_tool_OBC_rest(callback,name,edit,version)
+        try:
+            if dag_contents['success']!='failed':
+                generate_file(tool_id)
+                payload['status']=dag__trigger(tool_id,name,edit)
+            else:
+                payload['status']='failed'
+                payload['reason']=dag_contents
+        except KeyError:
+            print('Dag not found')
+            payload=dag_contents
+    elif work_type == 'workflow':
         workflow_id = data['workflow_id']
         dag_contents = get_workflow_OBC_rest(callback,name,edit,workflow_id)
         try:
@@ -347,8 +300,8 @@ def run_wf():
     return json.dumps(payload)
 
 
-@app.route(f"/{os.environ['OBC_USER_ID']}/check", methods=['GET'])
-def get_status_of_workflow():
+@app.route(f"/{os.environ['OBC_USER_ID']}/check/id/<string:dag_id>", methods=['GET'])
+def get_status_of_workflow(dag_id):
     '''
     Get dag status from airflow
     Request using curl to get the status of running or finished dag:
@@ -363,7 +316,7 @@ def get_status_of_workflow():
     '''
 
     ret = {}
-    url = f'http://172.18.0.5:8080/api/experimental/dags/{id}/dag_runs'
+    url = f'http://172.18.0.5:8080/api/experimental/dags/{dag_id}/dag_runs'
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -371,10 +324,7 @@ def get_status_of_workflow():
 
     payload={} # Future changes for scheduling workflow
     response = requests.post(url,data=json.dumps(payload),headers=headers)
-    while "error" in response.json():
-        response = requests.post(url,data=json.dumps(payload),headers=headers)
-        if "error" not in response.json():
-            break
+
     print("---> Response from airflow : ")
     print(response.json())
     return response.json()

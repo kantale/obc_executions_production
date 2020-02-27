@@ -27,7 +27,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # Uncomment only for production purposes 
       - ./client:/code
-      - datavolume:/code/generated_dags
+      - dagvolume:/code/generated_dags
+      - reportvolume:/code/REPORTS
     ports:
       - "5000:5000"
     networks:
@@ -37,13 +38,13 @@ services:
     container_name: OBC_client      
 
   airflowserver:
-    image: puckel/docker-airflow:1.10.9
-#    build:
-      #context: ../docker-obc-airflow
-      #dockerfile: Dockerfile
-#      args:
-#        AIRFLOW_DEPS: gcp_api,s3
-#        PYTHON_DEPS: sqlalchemy==1.2.0
+    image: manoskoutoulakis/docker-obc-airflow:1.10.9
+    # build:
+      # context: ../docker-obc-airflow
+      # dockerfile: Dockerfile
+      # args:
+        # AIRFLOW_DEPS: gcp_api,s3
+        # PYTHON_DEPS: sqlalchemy==1.2.0
     restart: always
     depends_on:
       - postgres
@@ -52,17 +53,15 @@ services:
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
     volumes:
-      - datavolume:/usr/local/airflow/dags
+      - dagvolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
 #      - ./logs:/usr/local/airflow/logs
       # Configuration File
-#      - ./airflow.cfg:/usr/local/airflow/airflow.cfg
+      - ./airflow.cfg:/usr/local/airflow/airflow.cfg
       - /var/run/docker.sock:/var/run/docker.sock
       # Folders which contains outputs,data,steps(bash files) of all the finished dags 
-#      - ./DATA:/usr/local/airflow/DATA
-#      - ./TOOL:/usr/local/airflow/TOOL
-#      - ./WORK:/usr/local/airflow/WORK
-
+      - reportvolume:/usr/local/airflow/REPORTS
+      
       # For custom plugins
       # - ./plugins:/usr/local/airflow/plugins
     ports:
@@ -80,7 +79,9 @@ services:
     container_name: airflow
 volumes:
   # Dag volumes 
-  datavolume: 
+  dagvolume:
+  reportvolume:
+ 
 
 networks:
   # Communication between client and airflow restapi
