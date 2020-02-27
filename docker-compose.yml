@@ -23,7 +23,10 @@ services:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
       # volume which share data with airflow
+      - ./client:/code
       - dagvolume:/code/generated_dags
+      - reportvolume:/code/REPORTS
+      - loggingvolume:/code/REPORTS/logs
     ports:
       - "5000:5000"
     networks:
@@ -48,13 +51,14 @@ services:
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
     volumes:
-      # Volume which share data with client
       - dagvolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
-      - ./logs:/usr/local/airflow/logs
+      - loggingvolume:/usr/local/airflow/logs
       # Configuration File
-      - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+      - ./airflow.cfg:/usr/local/airflow/airflow.cfg
       - /var/run/docker.sock:/var/run/docker.sock
+      # Folders which contains outputs,data,steps(bash files) of all the finished dags 
+      - reportvolume:/usr/local/airflow/REPORTS
       # For custom plugins
       # - ./plugins:/usr/local/airflow/plugins
     ports:
@@ -74,6 +78,8 @@ services:
 volumes:
   # client-airflow dags volume
   dagvolume:
+  reportvolume:
+  loggingvolume:
 networks:
   #Communication between client and airflow restapi
   # 172.18.0.4 --> client IP
