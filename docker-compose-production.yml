@@ -29,6 +29,7 @@ services:
       - ./client:/code
       - dagvolume:/code/generated_dags
       - reportvolume:/code/REPORTS
+      - loggingvolume:/code/REPORTS/logs
     ports:
       - "5000:5000"
     networks:
@@ -55,7 +56,7 @@ services:
     volumes:
       - dagvolume:/usr/local/airflow/dags
       # Folder where airflow should store its log files
-#      - ./logs:/usr/local/airflow/logs
+      - loggingvolume:/usr/local/airflow/logs
       # Configuration File
       - ./airflow.cfg:/usr/local/airflow/airflow.cfg
       - /var/run/docker.sock:/var/run/docker.sock
@@ -81,7 +82,7 @@ volumes:
   # Dag volumes 
   dagvolume:
   reportvolume:
- 
+  loggingvolume:
 
 networks:
   # Communication between client and airflow restapi
