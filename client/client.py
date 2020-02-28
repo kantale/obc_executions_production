@@ -9,6 +9,7 @@ from datetime import datetime
 import docker
 import requests
 import time
+import zipfile
 def docker_setups():
     '''
     NOT USED
@@ -29,15 +30,11 @@ if __name__ == '__main__':
     
 
 # Dag_directory
-#TODO -> Set public ip of OBC_server and OBC_Client as enviroment variable
-OBC_server="192.168.1.13"
-OBC_client=""
-
 dag_directory = "generated_dags/"
 #not fixed we use tha same dir for tool and workflows
 # dag_wf_directory = "generated_dags/wf/"
 # dag_tl_directory = "generated_dags/tool/"
-
+compressed_logfiles = "compressed_logs/"
 
 def create_filename(id):
     '''
@@ -259,6 +256,8 @@ def run_wf():
     which communicate both airflow and OBC_client
     '''
     payload={} # Future changes for scheduling workflow
+    d = request.get_data()
+    app.logger.info(str(d))
     data = json.loads(request.get_data())
 
     name = data['name']
@@ -267,6 +266,7 @@ def run_wf():
     callback= data['callback']
     
     print(request.base_url)
+    app.logger.info(data)
     if work_type == 'tool':
         tool_id = data['tool_id']
         version = data['version']
@@ -323,16 +323,58 @@ def get_status_of_workflow(dag_id):
         }
 
     payload={} # Future changes for scheduling workflow
-    response = requests.post(url,data=json.dumps(payload),headers=headers)
+    response = requests.get(url)
 
     print("---> Response from airflow : ")
-    print(response.json())
-    return response.json()
+    res=response.json()
+    return json.dumps(res)
 
 
 
-@app.route('/test/download')
-def downloadFile ():
-    #For windows you need to use drive name [ex: F:/Example.pdf]
-    path = "README.md"
-    return send_file(path, as_attachment=True)
+@app.route(f"/{os.environ['OBC_USER_ID']}/download/<string:dag_id>/<string:filename>")
+def downloadFile(report_type,dag_id,filename):
+    '''
+        Download the result from workflow execution
+        The data are seperated in three different folders TOOL,DATA,WORK
+
+        dag_id : the id of dag that the user could take the reports
+        filename : the name of file which the user want to download
+        TODO -> Change in the future the filename because of replaced by compressed file that contains all results
+    '''
+    downloaded_path=f"REPORTS/WORK/{filename}"
+    return send_file(downloaded_path, as_attachment=True)
+
+
+def zipfile(path,name):
+    '''
+    '''
+    try:
+        import zlib
+        compression = zipfile.ZIP_DEFLATED
+    except:
+        compression = zipfile.ZIP_STORED
+
+    modes = { zipfile.ZIP_DEFLATED: 'deflated',
+            zipfile.ZIP_STORED:   'stored',
+            }
+
+    print('creating archive')
+    zf = zipfile.ZipFile(f'dag_id.zip', mode='w')
+    try:
+        print(f"adding log's folder [ {path} ] with compression mode", modes[compression])
+        zf.write(f'{path}', compress_type=compression)
+    finally:
+        print('closing')
+        zf.close()
+
+
+
+@app.route(f"/{os.environ['OBC_USER_ID']}/logs/<string:dag_id>")
+def getLogs(dag_id):
+    '''
+        Get the whole logs from workflow execution to zip type
+        The logs of execution are seperated in different files (file per step)
+        dag_id : the name of dag
+    '''
+    log_path= f"REPORTS/logs/{dag_id}"
+    download_path= create_zipfile(log_path,dag_id)
