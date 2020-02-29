@@ -12,7 +12,7 @@ services:
       main_net:
   restapi:
     image: manoskoutoulakis/obc_client:latest
-    #build: client/ .
+    build: client/ .
     environment:
       - OBC_USER_ID=${OBC_USER_ID}
     depends_on:
@@ -23,7 +23,7 @@ services:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
       # volume which share data with airflow
-      - ./client:/code
+      #- ./client:/code
       - dagvolume:/code/generated_dags
       - reportvolume:/code/REPORTS
       - loggingvolume:/code/REPORTS/logs
