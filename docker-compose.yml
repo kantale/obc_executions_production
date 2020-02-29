@@ -12,7 +12,7 @@ services:
       main_net:
   restapi:
     image: manoskoutoulakis/obc_client:latest
-    build: client/ .
+    #build: client/ .
     environment:
       - OBC_USER_ID=${OBC_USER_ID}
     depends_on:
