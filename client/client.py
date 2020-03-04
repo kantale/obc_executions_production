@@ -9,7 +9,17 @@ from datetime import datetime
 import docker
 import requests
 import time
-import zipfile
+# This module is to make logs in zip type
+import zipfile 
+import shutil
+import sys
+
+def print_f(message):
+    '''
+    For debug scopes
+    '''
+    return print(message,file=sys.stderr)
+
 def docker_setups():
     '''
     NOT USED
@@ -69,7 +79,7 @@ def generate_file(id,instructions):
     filename,filename_path = create_filename(id)
     
     if os.path.exists(filename_path):
-        print("This file exists")
+        print_f("This file exists")
         # delete_dag_file(filename_path)
         with open(filename_path,'w') as dag_file:
             dag_file.write(instructions)
@@ -142,8 +152,8 @@ def generate_file(id,instructions):
 #     # delete_result['dag_name']=dag_name
 #     delete_result['status']="deleted"
 #     delete_result['output'] = delete_from_airflow(dag_name)
-#     print(f"delete_result = {type(delete_result)}")
-#     print(f"data = {type(data)}")
+#     print_f(f"delete_result = {type(delete_result)}")
+#     print_f(f"data = {type(data)}")
     
 #     return data
 #      # return data
@@ -159,11 +169,11 @@ def get_tool_OBC_rest(callback,tool_id, tl_name, tl_edit,tl_version):
     response = requests.get(f'{callback}rest/tools/{tl_name}/{tl_version}/{tl_edit}/?dag=true&tool_id={tool_id}')
 
     if response.status_code != 200:
-        print(f"Error while retrieving data. ERROR_CODE : {response.status_code}")
+        print_f(f"Error while retrieving data. ERROR_CODE : {response.status_code}")
         dag_contents['success']='false'
         dag_contents['error']=f"Error while retrieving data. ERROR_CODE : {response.status_code}"
     else:
-        print("success")
+        print_f("success")
         dag_contents=response.json()
     
     return dag_contents
@@ -177,11 +187,11 @@ def get_workflow_OBC_rest(callback,wf_name, wf_edit,workflow_id):
     response = requests.get(f'{callback}rest/workflows/{wf_name}/{wf_edit}/?dag=true&workflow_id={workflow_id}')
     dag_contents={}
     if response.status_code != 200:
-        print(f"Error while retrieving data. ERROR_CODE : {response.status_code}")
+        print_f(f"Error while retrieving data. ERROR_CODE : {response.status_code}")
         dag_contents['success']='false'
         dag_contents['error']=f"Error while retrieving data. ERROR_CODE : {response.status_code}"
     else:
-        print("success")
+        print_f("success")
         dag_contents=response.json()
     
     return dag_contents
@@ -209,23 +219,24 @@ def dag__trigger(id,name,edit):
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
         }
-
+    # TODO -> MUST BE CHANGED BETTER NOT TO USE WHILE !
     payload={} # Future changes for scheduling workflow
     effort = 0
     while True:
         effort += 1
-        print (f'Effort: {effort}')
+        print_f (f'Effort: {effort}')
         response = requests.post(url,data=json.dumps(payload),headers=headers)
-        if not response.ok:
-            print ('Response error:', response.status_code)
-            print (json.dumps(response.json(), indent=4))
+        print_f(f"{response.ok}")
+        if response.ok == False:
+            print_f (f'Response error:{response.status_code}')
+            print_f (f'{json.dumps(response.json(), indent=4)}')
             time.sleep(1)
         else:
             break
 
 
-    print("---> Response from airflow : ")
-    print(response.json())
+    print_f("---> Response from airflow : ")
+    print_f(response.json())
     return response.json()
 
 
@@ -265,7 +276,7 @@ def run_wf():
     work_type = data['type']
     callback= data['callback']
     
-    print(request.base_url)
+    print_f(request.base_url)
     app.logger.info(data)
     if work_type == 'tool':
         tool_id = data['tool_id']
@@ -279,7 +290,7 @@ def run_wf():
                 payload['status']='failed'
                 payload['reason']=dag_contents
         except KeyError:
-            print('Dag not found')
+            print_f('Dag not found')
             payload=dag_contents
     elif work_type == 'workflow':
         workflow_id = data['workflow_id']
@@ -292,7 +303,7 @@ def run_wf():
                 payload['status']='failed'
                 payload['reason']=dag_contents
         except KeyError:
-            print('Dag not found')
+            print_f('Dag not found')
             payload=dag_contents
     else:
         payload['status']="failed"
@@ -325,7 +336,7 @@ def get_status_of_workflow(dag_id):
     payload={} # Future changes for scheduling workflow
     response = requests.get(url)
 
-    print("---> Response from airflow : ")
+    print_f("---> Response from airflow : ")
     res=response.json()
     return json.dumps(res)
 
@@ -344,37 +355,32 @@ def downloadFile(report_type,dag_id,filename):
     downloaded_path=f"REPORTS/WORK/{filename}"
     return send_file(downloaded_path, as_attachment=True)
 
-
-def zipfile(path,name):
+def create_zipfile(content_path,zipped_path,name):
     '''
+    The main usage of this function is to generate zip file containing logs from dag which they run.
+    The log files are seperated into a folders, every folder was named according to the steps of dag.
+    Path of logs /code/REPORTS/logs/<dag_id>/
+    Path of compressed logs /code/REPORTS/logs/<dag_id>/<dag_id.zip>
+    log_path = source of log folder
+    zipped_path = source of zipped logs to be saved
+    zipfile_name = is the name of dag (<dag_id>.zip)
     '''
-    try:
-        import zlib
-        compression = zipfile.ZIP_DEFLATED
-    except:
-        compression = zipfile.ZIP_STORED
-
-    modes = { zipfile.ZIP_DEFLATED: 'deflated',
-            zipfile.ZIP_STORED:   'stored',
-            }
-
-    print('creating archive')
-    zf = zipfile.ZipFile(f'dag_id.zip', mode='w')
-    try:
-        print(f"adding log's folder [ {path} ] with compression mode", modes[compression])
-        zf.write(f'{path}', compress_type=compression)
-    finally:
-        print('closing')
-        zf.close()
-
-
+    shutil.make_archive(f'{zipped_path}/{name}', 'zip', content_path)
+    download_path = f"{zipped_path}/{name}.zip"
+    return download_path
 
 @app.route(f"/{os.environ['OBC_USER_ID']}/logs/<string:dag_id>")
 def getLogs(dag_id):
     '''
+        example:
+        http://192.168.1.21:5000/d8a05e4b0d2a46b78dce482378d2c39d/logs/mitsos6
+
         Get the whole logs from workflow execution to zip type
         The logs of execution are seperated in different files (file per step)
         dag_id : the name of dag
     '''
-    log_path= f"REPORTS/logs/{dag_id}"
-    download_path= create_zipfile(log_path,dag_id)
+    log_path= f"/code/REPORTS/logs/{dag_id}" 
+    destination_log_path = f"/code/REPORTS/compressed_logs"
+    
+    download_path= create_zipfile(log_path,destination_log_path,dag_id)
+    return send_file(download_path, as_attachment=True)

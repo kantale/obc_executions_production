@@ -12,11 +12,11 @@ RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY * /code/
+COPY client.py /code/
+COPY REPORTS/ /code/
+COPY generated_dags/ /code/
+#COPY compressed_logs/ /code/
 
-RUN mkdir generated_dags
-#RUN mkdir generated_dags/wf
-#RUN mkdir generated_dags/tool
-RUN mkdir compressed_logs
-
+#RUN mkdir generated_dags
+#RUN mkdir compressed_logs
 CMD ["flask", "run"]

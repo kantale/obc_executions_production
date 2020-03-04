@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile
     environment:
       - OBC_USER_ID=${OBC_USER_ID}
+      - FLASK_ENV=development
+#      - PYTHONUNBUFFERED=1
     depends_on:
       - postgres
       - airflowserver
@@ -26,10 +28,11 @@ services:
       # docker connect with client to get info or execute commands
       - /var/run/docker.sock:/var/run/docker.sock
       # Uncomment only for production purposes 
-      - ./client:/code
+      - ./client/client.py:/code/client.py
       - dagvolume:/code/generated_dags
       - reportvolume:/code/REPORTS
       - loggingvolume:/code/REPORTS/logs
+      - ./client/compressed_logs:/code/REPORTS/compressed_logs
     ports:
       - "5000:5000"
     networks:

@@ -27,6 +27,8 @@ services:
       - dagvolume:/code/generated_dags
       - reportvolume:/code/REPORTS
       - loggingvolume:/code/REPORTS/logs
+      #TODO -> Change that
+      - ./compressed_logs:/code/REPORTS/compressed_log
     ports:
       - "5000:5000"
     networks:
