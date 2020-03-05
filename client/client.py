@@ -40,10 +40,10 @@ if __name__ == '__main__':
     
 
 # Dag_directory
-dag_directory = "generated_dags/"
+dag_directory = "dags/"
 #not fixed we use tha same dir for tool and workflows
-# dag_wf_directory = "generated_dags/wf/"
-# dag_tl_directory = "generated_dags/tool/"
+# dag_wf_directory = "dags/wf/"
+# dag_tl_directory = "dags/tool/"
 compressed_logfiles = "compressed_logs/"
 
 def create_filename(id):
@@ -342,8 +342,8 @@ def get_status_of_workflow(dag_id):
 
 
 
-@app.route(f"/{os.environ['OBC_USER_ID']}/download/<string:dag_id>/<string:filename>")
-def downloadFile(report_type,dag_id,filename):
+@app.route(f"/{os.environ['OBC_USER_ID']}/download/<string:dag_id>")
+def downloadFile(dag_id):
     '''
         Download the result from workflow execution
         The data are seperated in three different folders TOOL,DATA,WORK
@@ -352,7 +352,7 @@ def downloadFile(report_type,dag_id,filename):
         filename : the name of file which the user want to download
         TODO -> Change in the future the filename because of replaced by compressed file that contains all results
     '''
-    downloaded_path=f"REPORTS/WORK/{filename}"
+    downloaded_path=f"/code/REPORTS/WORK/{dag_id}.tgz"
     return send_file(downloaded_path, as_attachment=True)
 
 def create_zipfile(content_path,zipped_path,name):

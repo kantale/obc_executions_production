@@ -26,10 +26,10 @@ services:
     restart: always
     volumes:
       # docker connect with client to get info or execute commands
-      - /var/run/docker.sock:/var/run/docker.sock
+#      - /var/run/docker.sock:/var/run/docker.sock
       # Uncomment only for production purposes 
       - ./client/client.py:/code/client.py
-      - dagvolume:/code/generated_dags
+      - dagvolume:/code/dags
       - reportvolume:/code/REPORTS
       - loggingvolume:/code/REPORTS/logs
       - ./client/compressed_logs:/code/REPORTS/compressed_logs
@@ -62,12 +62,12 @@ services:
       - loggingvolume:/usr/local/airflow/logs
       # Configuration File
       - ./airflow.cfg:/usr/local/airflow/airflow.cfg
-      - /var/run/docker.sock:/var/run/docker.sock
+ #     - /var/run/docker.sock:/var/run/docker.sock
       # Folders which contains outputs,data,steps(bash files) of all the finished dags 
       - reportvolume:/usr/local/airflow/REPORTS
       
       # For custom plugins
-      # - ./plugins:/usr/local/airflow/plugins
+      #- ./plugins:/usr/local/airflow/plugins
     ports:
       - "8080:8080"
     networks:
