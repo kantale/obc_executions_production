@@ -13,6 +13,8 @@ import time
 import zipfile 
 import shutil
 import sys
+#Communicate with airflow database
+import pg8000
 
 def print_f(message):
     '''
@@ -30,6 +32,28 @@ def docker_setups():
 
 # Init app
 
+def connect_to_airflow_db():
+    '''
+    Connect to airflow Postgresql and allow us execute query from obc_client
+    '''
+    conn = pg8000.connect(
+        database="airflow",
+        user="airflow", 
+        password="airflow",
+        host=os.environ['PUBLIC_IP'],
+        port=5432)
+
+    return conn
+
+def execute_query(query):
+    '''
+    execute the query and return the result as a list
+    '''
+    conn = connect_to_airflow_db()
+    cursor= conn.cursor()
+    result = cursor.execute(query)
+    return result.fetchall()
+
 
 app = Flask(__name__)
 
@@ -40,7 +64,7 @@ if __name__ == '__main__':
     
 
 # Dag_directory
-dag_directory = "dags/"
+dag_directory = "/code/dags/"
 #not fixed we use tha same dir for tool and workflows
 # dag_wf_directory = "dags/wf/"
 # dag_tl_directory = "dags/tool/"
@@ -65,8 +89,8 @@ def get_full_path(filename):
     #     return f"{dag_wf_directory}/{filename}"
     # elif dag_type == 'tool':
     #     return f"{dag_tl_directory}/{filename}"
-    return f"{dag_directory}"
-def generate_file(id,instructions):
+    return f"{dag_directory}{filename}.py"
+def generate_file(dag_id,instructions):
     '''
     Get the data from request to generate the dag file
     name : The name of file to be generated
@@ -76,87 +100,74 @@ def generate_file(id,instructions):
     '''
     
     ret={}
-    filename,filename_path = create_filename(id)
+    filename,filename_path = create_filename(dag_id)
     
     if os.path.exists(filename_path):
         print_f("This file exists")
-        # delete_dag_file(filename_path)
         with open(filename_path,'w') as dag_file:
             dag_file.write(instructions)
-        # ret['generate_date'] = datetime.now()
-        # ret['update_date']= datetime.now()
     else:
         with open(filename_path,'w') as dag_file:
             dag_file.write(instructions)
-        # ret['generate_date'] = datetime.now()
-    # ret['owner']= 
-    # return ret
 
-# def delete_from_airflow(dag_name):
-#     '''
-#     Delete the dag from airflow Database
-#     '''
-#     url = f'http://172.18.0.5:8080/api/experimental/dags/{dag_name}/dag_runs'
-#     headers = {
-#         "Content-Type": "application/json",
-#         "Cache-Control": "no-cache"
-#         }
+def delete_from_airflow(dag_name):
+    '''
+    Delete the dag from airflow Database
+    '''
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_name}"
+    headers = {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+        }
 
-#     response = requests.delete(url)
+    response = requests.delete(url)
 
-#     return response
+    return response
 
-# def delete_dag_file(dag_name):
-#     '''
-#     Delete selected dag file
-#     '''
-#     ret={}
-#     full_path = get_full_path(dag_name)
-#     if os.path.exists(full_path):
-#         os.remove(full_path)
-#         ret['delete_date'] = datetime.now()
-#     else:
-#         ret['generate_date'] = None
-#         ret['msg']= "The file does not exist"
-#     return ret
+def delete_dag_file(dag_name):
+    '''
+    Delete selected dag file
+    '''
+    ret={}
+    full_path = get_full_path(dag_name)
+    print_f(f"File -->{full_path} \nFile exists --> {str(os.path.exists(full_path))}")
+    if os.path.exists(full_path):
+        print_f(f"File exist --> {full_path}")
+        os.remove(full_path)
+        ret['delete_date'] = datetime.now()
+    else:
+        ret['generate_date'] = None
+        ret['msg']= "The file does not exist"
+    print_f(f"{ret}")
+    return ret
 
 
-# @app.route(f"/{os.environ['OBC_USER_ID']}/delete_dag", methods=['DELETE','GET'])
-# def delete_dag():
-#     '''
-#     NOT USED YET
-#     Get request from openBio platform
-#     which contains the file name, dag instructions
-#     request data :
-#     filename:blah,
-#     bash:blah,
-#     owner:blah,
+@app.route(f"/{os.environ['OBC_USER_ID']}/workflow/delete/<string:dag_id>", methods=['DELETE','GET'])
+def delete_dag(dag_id):
+    '''
+    Get request from openBio platform
+    which contains the file name, dag instructions
+    '''
+    # Parse data json to dict
+    delete_result={}
+    result={}
+    dag_filename=f"{dag_id}.py" 
+    delete_result= delete_dag_file(dag_id)
+    result = delete_from_airflow(dag_id).json()
+    # delete_result['status']="deleted"
+    # print_f(f"{"error" in result['error']}")
+    if "error" in result:
+        print_f("Einai mesa")
+        result["status"]="failed"
+        result["dag_id"]=f"{dag_id}"
+    else:
+        result["status"]="failed"
+        result["dag_id"]=f"{dag_id}"
+        result["status"]="success"
+        result["dag_id"]=f"{dag_id}"
 
-#     response:
-#         generate_date: blah
-#         owner: blah
-#         status:deleted
-#     '''
-#     # Parse data json to dict
-
-#     delete_result={}
-#     data = json.loads(request.get_data())
-#     name = data['name']
-#     edit = data['edit']   
-#     dag_filename=f"{name}_{edit}.py" 
-#     dag_name=f"{name}__{edit}"
-#     delete_result['date'] = delete_dag_file(dag_name)
-   
-
-#     # # delete_result['owner']= owner
-#     # delete_result['dag_name']=dag_name
-#     delete_result['status']="deleted"
-#     delete_result['output'] = delete_from_airflow(dag_name)
-#     print_f(f"delete_result = {type(delete_result)}")
-#     print_f(f"data = {type(data)}")
-    
-#     return data
-#      # return data
+    return result
+     
 
 
 
@@ -214,7 +225,7 @@ def dag__trigger(id,name,edit):
     which communicate both airflow and OBC_client
     '''
     ret = {}
-    url = f'http://172.18.0.5:8080/api/experimental/dags/{id}/dag_runs'
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{id}/dag_runs"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -326,18 +337,30 @@ def get_status_of_workflow(dag_id):
 
     '''
 
-    ret = {}
-    url = f'http://172.18.0.5:8080/api/experimental/dags/{dag_id}/dag_runs'
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_id}/dag_runs"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
         }
 
-    payload={} # Future changes for scheduling workflow
+    # payload={} # Future changes for scheduling workflow
     response = requests.get(url)
 
-    print_f("---> Response from airflow : ")
-    res=response.json()
+    
+
+    # print_f("---> Response from airflow : ")
+
+    paused_dags = [reg[0] for reg in execute_query("SELECT dag_id FROM dag WHERE is_paused")]
+    print_f(f"Paused dags : {paused_dags}")
+    if response.ok == True:
+        res=response.json()
+        if dag_id in paused_dags:
+            for dag in res:
+                dag["state"]='paused'
+        print_f(response.json())
+    else:
+        print_f("DAG NOT FOUND")
+        res=[]    
     return json.dumps(res)
 
 
@@ -384,3 +407,23 @@ def getLogs(dag_id):
     
     download_path= create_zipfile(log_path,destination_log_path,dag_id)
     return send_file(download_path, as_attachment=True)
+
+
+@app.route(f"/{os.environ['OBC_USER_ID']}/workflow/<string:dag_id>/paused/<string:status>", methods=['GET'])
+def pause_workfow(dag_id,status):
+    '''
+    ‘<string:status>’ must be a ‘true’ to pause a DAG and ‘false’ to unpause.
+    '''
+
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_id}/paused/{status}"
+    headers = {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+        }
+
+    response = requests.get(url)
+    print_f("---> Response from airflow : ")
+    return response.json()
+
+
+
