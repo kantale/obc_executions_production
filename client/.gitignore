@@ -1,3 +1,4 @@
 *.swp
 curlexample
+compressed_logs
 __pycache__
