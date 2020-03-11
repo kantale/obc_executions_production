@@ -23,7 +23,7 @@ if [ $? -ne 0 ] ; then
 	echo "Checking your system"
 	export DOCKERVERSION=docker-19.03.7
 	export HARDWAREARCH=$(uname --m)
-	export DOWNLOADURL=https://download.docker.com/linux/static/stable/$HARDARCH/$DOCKERVERSION.tgz
+	export DOWNLOADURL=https://download.docker.com/linux/static/stable/$HARDWAREARCH/$DOCKERVERSION.tgz
 	sleep 2
 	echo "Docker download url : " $DOWNLOADURL
 	tar xzvf $DOCKERVERSION.tgz
