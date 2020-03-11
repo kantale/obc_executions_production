@@ -12,6 +12,7 @@ services:
     image: manoskoutoulakis/obc_client:latest
     environment:
       - OBC_USER_ID=${OBC_USER_ID}
+      - PUBLIC_IP=${PUBLIC_IP}
     depends_on:
       - postgres
       - airflowserver

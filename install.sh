@@ -90,9 +90,9 @@ echo -e "Client ID for OpenBioC Server : \033[38;2;0;255;0m${OBC_USER_ID}\033[0m
 export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
 
 # File contains images
-wget -O docker-compose.yml --directory-prefix=${OBC_EXECUTOR_PATH} https://raw.githubusercontent.com/manoskout/obc_executions_production/master/docker-compose.yml
+wget -O ${OBC_EXECUTOR_PATH}/docker-compose.yml https://raw.githubusercontent.com/manoskout/obc_executions_production/master/docker-compose.yml
 # Config File
-wget -O airflow.cfg --directory-prefix=${OBC_EXECUTOR_PATH} https://raw.githubusercontent.com/manoskout/obc_executions_production/master/airflow.cfg
+wget -O ${OBC_EXECUTOR_PATH}/airflow.cfg https://raw.githubusercontent.com/manoskout/obc_executions_production/master/airflow.cfg
 
 
 
