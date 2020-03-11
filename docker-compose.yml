@@ -8,8 +8,6 @@ services:
       - POSTGRES_DB=airflow
     ports:
       - "5432:5432"
-    networks:
-      main_net:
   restapi:
     image: manoskoutoulakis/obc_client:latest
     environment:
@@ -30,9 +28,6 @@ services:
     ports:
       - "5000:5000"
     networks:
-      air_rest:
-        ipv4_address: 172.18.0.4
-      main_net:
     container_name: executor_OBC
 
   airflowserver:
@@ -58,10 +53,6 @@ services:
       # - ./plugins:/usr/local/airflow/plugins
     ports:
       - "8080:8080"
-    networks:
-      air_rest:
-        ipv4_address: 172.18.0.5
-      main_net:
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
