@@ -17,11 +17,23 @@ echo "Installation will take a few minutes. Please be patient..."
 echo "State 1/3 (Install docker) "
 docker -v
 if [ $? -ne 0 ] ; then 
-	echo "Docker is not installed."
-	echo "Docker installation start...."
-	curl -fsSL https://get.docker.com -o get-docker.sh
-	sh get-docker.sh
-	rm -r get-docker.sh
+	#echo "Docker is not installed."
+	echo "Docker installation starts...."
+	sleep 2
+	echo "Checking your system"
+	export DOCKERVERSION=docker-19.03.7
+	export HARDWAREARCH=$(uname --m)
+	export DOWNLOADURL=https://download.docker.com/linux/static/stable/$HARDARCH/$DOCKERVERSION.tgz
+	sleep 2
+	echo "Docker download url : " $DOWNLOADURL
+	tar xzvf $DOCKERVERSION.tgz
+	sudo mv docker/* /usr/bin/
+	echo "Moving docker binaries on /usr/bin/"
+	sleep 2
+	echo "Start Docker daemon..."
+	sudo dockerd &
+	sleep 2
+	echo "Post install docker (run docker without sudo)"
 	# Post install docker https://docs.docker.com/install/linux/linux-postinstall/
 	# Run docker without sudo
 	sudo groupadd docker
