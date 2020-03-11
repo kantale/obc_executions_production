@@ -33,11 +33,11 @@ if [ $? -ne 0 ] ; then
 	echo "Start Docker daemon..."
 	sudo dockerd &
 	sleep 2
-	echo "Post install docker (run docker without sudo)"
+	# echo "Post install docker (run docker without sudo)"
 	# Post install docker https://docs.docker.com/install/linux/linux-postinstall/
 	# Run docker without sudo
-	sudo groupadd docker
-	sudo usermod -aG docker $USER
+	# sudo groupadd docker
+	# sudo usermod -aG docker $USER
 	# Simplify somehow the next steps 
 	# 1) Log out and log back in so that your group membership is re-evaluated
 	# 2) If you initially ran Docker CLI commands using sudo before adding your 
@@ -46,8 +46,8 @@ if [ $? -ne 0 ] ; then
 	#    permissions due to the sudo commands.
 
 	#    To fix that error run:
-        sudo chown "$USER":"$USER" /home/"$USER"/.docker -Run
-	sudo chmod g+rwx "$HOME/.docker" -R
+    # sudo chown "$USER":"$USER" /home/"$USER"/.docker -Run
+	# sudo chmod g+rwx "$HOME/.docker" -R
 
 
 fi
@@ -134,7 +134,7 @@ done
 echo "Exit code of Executor port Finder : " $?
 echo "Port which Executor running : " $OBC_EXECUTOR_PORT
 
-echo -e OBC_USER_ID=$OBC_USER_ID"\n"PUBLIC_IP=$PUBLIC_IP"\n"OBC_EXECUTOR_PORT=$OBC_EXECUTOR_PORT"\n"OBC_AIRFLOW_PORT=$OBC_AIRFLOW_PORT >> .env 
+echo -e OBC_USER_ID=$OBC_USER_ID"\n"PUBLIC_IP=$PUBLIC_IP"\n"OBC_EXECUTOR_PORT=$OBC_EXECUTOR_PORT"\n"OBC_AIRFLOW_PORT=$OBC_AIRFLOW_PORT >> $OBC_EXECUTOR_PATH/.env 
 
 
 docker-compose up -d
