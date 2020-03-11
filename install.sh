@@ -26,6 +26,7 @@ if [ $? -ne 0 ] ; then
 	export DOWNLOADURL=https://download.docker.com/linux/static/stable/$HARDWAREARCH/$DOCKERVERSION.tgz
 	sleep 2
 	echo "Docker download url : " $DOWNLOADURL
+	wget $DOWNLOADURL
 	tar xzvf $DOCKERVERSION.tgz
 	sudo mv docker/* /usr/bin/
 	echo "Moving docker binaries on /usr/bin/"
