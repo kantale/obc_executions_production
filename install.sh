@@ -59,16 +59,7 @@ docker-compose -v
 if [ $? -ne 0 ] ; then
 	echo "Docker-Compose is not installed."
 	echo "Docker-Compose installation start...."
-	sudo wget \
-        	--output-document=/usr/local/bin/docker-compose \
-        	https://github.com/docker/compose/releases/download/1.24.0/run.sh \
-    	&& sudo chmod +x /usr/local/bin/docker-compose \
-    	&& sudo wget \
-        	--output-document=/etc/bash_completion.d/docker-compose \
-        	"https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose" \
-    	&& printf '\nDocker Compose installed successfully\n\n' \
-	rm -r run.sh
-
+	sudo docker-compose
 fi
 
 echo "State 3/3 (Setting up variables and installing the OpenBio Executor) "
@@ -95,9 +86,9 @@ echo -e "Client ID for OpenBioC Server : \033[38;2;0;255;0m$OBC_USER_ID\033[0m"
 export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
 
 # File contains images
-wget --directory-prefix=$OBC_EXECUTOR_PATH https://raw.githubusercontent.com/manoskout/OpenBioC_Execution/master/docker-compose.yml
+wget --directory-prefix=$OBC_EXECUTOR_PATH https://raw.githubusercontent.com/manoskout/obc_executions_production/master/docker-compose.yml
 # Config File
-wget --directory-prefix=$OBC_EXECUTOR_PATH https://raw.githubusercontent.com/manoskout/docker-airflow/master/config/airflow.cfg
+wget --directory-prefix=$OBC_EXECUTOR_PATH https://raw.githubusercontent.com/manoskout/obc_executions_production/master/airflow.cfg
 
 
 
@@ -136,7 +127,8 @@ echo "Exit code of Executor port Finder : " $?
 echo "Port which Executor running : " $OBC_EXECUTOR_PORT
 
 echo -e OBC_USER_ID=$OBC_USER_ID"\n"PUBLIC_IP=$PUBLIC_IP"\n"OBC_EXECUTOR_PORT=$OBC_EXECUTOR_PORT"\n"OBC_AIRFLOW_PORT=$OBC_AIRFLOW_PORT >> $OBC_EXECUTOR_PATH/.env 
-
+#TODO -> change using docker-compose up -f asfsedfsdf.yml
+cd $OBC_EXECUTOR_PATH
 
 docker-compose up -d
 if [ $? -eq 0 ] ; then 
