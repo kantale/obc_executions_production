@@ -130,13 +130,13 @@ echo -e OBC_USER_ID=$OBC_USER_ID"\n"PUBLIC_IP=$PUBLIC_IP"\n"OBC_EXECUTOR_PORT=$O
 #TODO -> change using docker-compose up -f asfsedfsdf.yml
 cd $OBC_EXECUTOR_PATH
 
-docker-compose up -d
+sudo docker-compose up -d
 if [ $? -eq 0 ] ; then 
 
 	export OBC_EXECUTOR_URL="http://$PUBLIC_IP:$OBC_EXECUTOR_PORT/$OBC_USER_ID"
 	echo -e "\033[38;2;0;255;0m\n\n\n Successful installation \n\n\n\033[0m"
 	echo -e "\033[38;2;0;255;0m Close tests \033[0m"
-	docker-compose down
+	sudo docker-compose down
 	echo -e "\n\n\n\n\n"
 	echo $OBC_EXECUTOR_URL | xsel -ib
 	echo -e "\033[38;2;0;255;0m**IMPORTANT**\033[0m"
@@ -154,6 +154,6 @@ else
 #	docker network prune
 #        docker-compose up -d
 #        echo "service run test  code -> " $?
-	docker-compose down
+	sudo docker-compose down
 fi
 
