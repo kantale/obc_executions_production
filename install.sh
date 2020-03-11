@@ -16,7 +16,7 @@ echo "Installation will take a few minutes. Please be patient..."
 
 echo "State 1/3 (Install docker) "
 docker -v
-if [ $? -eq 1 ] ; then 
+if [ $? -ne 0 ] ; then 
 	echo "Docker is not installed."
 	echo "Docker installation start...."
 	curl -fsSL https://get.docker.com -o get-docker.sh
@@ -43,7 +43,7 @@ fi
 echo "State 2/3 (Install docker-compose) "
 
 docker-compose -v
-if [ $? -eq 1 ] ; then
+if [ $? -ne 0 ] ; then
 	echo "Docker-Compose is not installed."
 	echo "Docker-Compose installation start...."
 	sudo wget \
