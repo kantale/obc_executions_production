@@ -27,7 +27,6 @@ services:
       - ./client/compressed_logs:/code/REPORTS/compressed_logs
     ports:
       - "5000:5000"
-    networks:
     container_name: executor_OBC
 
   airflowserver:
