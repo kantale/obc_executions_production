@@ -34,8 +34,8 @@ if [ $? -eq 1 ] ; then
 	#    permissions due to the sudo commands.
 
 	#    To fix that error run:
-	# 		$ sudo chown "$USER":"$USER" /home/"$USER"/.docker -Run
-	#		$ sudo chmod g+rwx "$HOME/.docker" -R
+        sudo chown "$USER":"$USER" /home/"$USER"/.docker -Run
+	sudo chmod g+rwx "$HOME/.docker" -R
 
 
 fi
