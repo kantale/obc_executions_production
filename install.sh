@@ -18,64 +18,27 @@ echo "State 1/3 (Install docker) "
 
 # Save the distroID to optimize the installation of docker
 export DISTRO_ID=$(lsb_release -i -s)
-
-docker -v
+echo "Check if docker already exists..."
+# 1> /dev/null 2>&1 not show the output
+docker -v 1> /dev/null 2>&1
 if [ $? -ne 0 ] ; then 
-	#echo "Docker is not installed."
-	echo "Docker installation starts...."
+	echo "--> Docker is not installed, installation starts..."
 	sleep 2
-	echo "Checking your system"
 	# Save the distroID to optimize the installation of docker
 	export DISTRO_ID=$(lsb_release -i -s)
-	# if [ "$DISTRO_ID" == "Ubuntu" ]; then
-	# 	echo "Your distro is ${DISTRO_ID}, we check our information to install docker..."
-	# 	wget https://raw.githubusercontent.com/manoskout/obc_executions_production/master/inst_distr/${DISTRO_ID}.sh
-	# 	sleep 2
-	# 	bash ${DISTRO_ID}.sh
+	
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7EA0A9C3F273FCD8
 	sudo apt-get update
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
-
-	# export DOCKERVERSION=docker-19.03.7
-	# export HARDWAREARCH=$(uname --m)
-	# export DOWNLOADURL=https://download.docker.com/linux/static/stable/${HARDWAREARCH}/${DOCKERVERSION}.tgz
-	# sleep 2
-	# echo "Docker download url : ${DOWNLOADURL}"
-	# wget -O ${DOCKERVERSION}.tgz ${DOWNLOADURL}
-	# tar xzvf $DOCKERVERSION.tgz
-	# sudo mv docker/* /usr/bin/
-	# echo "Moving docker binaries on /usr/bin/"
-	# sleep 2
-	# echo "Start Docker daemon..."
-	# sudo dockerd &
-	# sleep 2
-	# echo "Post install docker (run docker without sudo)"
-	# Post install docker https://docs.docker.com/install/linux/linux-postinstall/
-	# Run docker without sudo
-	# sudo groupadd docker
-	# sudo usermod -aG docker $USER
-	# Simplify somehow the next steps 
-	# 1) Log out and log back in so that your group membership is re-evaluated
-	# 2) If you initially ran Docker CLI commands using sudo before adding your 
-	#    user to the docker group, you may see the following error, which 
-	#    indicates that your ~/.docker/ directory was created with incorrect 
-	#    permissions due to the sudo commands.
-
-	#    To fix that error run:
-    # sudo chown "$USER":"$USER" /home/"$USER"/.docker -Run
-	# sudo chmod g+rwx "$HOME/.docker" -R
-
-
 fi
 
 echo "State 2/3 (Install docker-compose) "
 
-docker-compose -v
+echo "Check if docker already exists..."
+docker-compose -v 1> /dev/null 2>&1
 if [ $? -ne 0 ] ; then
-	echo "Docker-Compose is not installed."
-	echo "Docker-Compose installation start...."
-	#sudo docker-compose
+	echo "--> Docker-Compose is not installed, installation starts..."
 
 	# Copy pasting from: https://docs.docker.com/compose/install/ 
 	sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose

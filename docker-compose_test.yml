@@ -27,7 +27,8 @@ services:
       - loggingvolume:/code/REPORTS/logs
       - ./client/compressed_logs:/code/REPORTS/compressed_logs
     ports:
-      - "$TESTVAR:5000"
+      - "{{env.TESTVAR}}:5000"
+      - $TESTVAR:5000
     container_name: executor_OBC
 
   airflowserver:
