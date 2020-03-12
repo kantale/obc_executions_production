@@ -15,25 +15,37 @@ echo "Welcome to the OpenBio Executor, ${USER}!"
 echo "Installation will take a few minutes. Please be patient..."
 
 echo "State 1/3 (Install docker) "
+
+# Save the distroID to optimize the installation of docker
+export DISTRO_ID=$(lsb_release -i -s)
+
 docker -v
 if [ $? -ne 0 ] ; then 
 	#echo "Docker is not installed."
 	echo "Docker installation starts...."
 	sleep 2
 	echo "Checking your system"
-	export DOCKERVERSION=docker-19.03.7
-	export HARDWAREARCH=$(uname --m)
-	export DOWNLOADURL=https://download.docker.com/linux/static/stable/${HARDWAREARCH}/${DOCKERVERSION}.tgz
-	sleep 2
-	echo "Docker download url : ${DOWNLOADURL}"
-	wget -O ${DOCKERVERSION}.tgz ${DOWNLOADURL}
-	tar xzvf $DOCKERVERSION.tgz
-	sudo mv docker/* /usr/bin/
-	echo "Moving docker binaries on /usr/bin/"
-	sleep 2
-	echo "Start Docker daemon..."
-	sudo dockerd &
-	sleep 2
+	# Save the distroID to optimize the installation of docker
+	export DISTRO_ID=$(lsb_release -i -s)
+	if [ "$DISTRO_ID" == "Ubuntu" ]; then
+		echo "Your distro is ${DISTRO_ID}, we check our information to install docker..."
+		wget https://raw.githubusercontent.com/manoskout/obc_executions_production/master/inst_distr/${DISTRO_ID}.sh
+		sleep 2
+		bash ${DISTRO_ID}.sh
+	fi
+	# export DOCKERVERSION=docker-19.03.7
+	# export HARDWAREARCH=$(uname --m)
+	# export DOWNLOADURL=https://download.docker.com/linux/static/stable/${HARDWAREARCH}/${DOCKERVERSION}.tgz
+	# sleep 2
+	# echo "Docker download url : ${DOWNLOADURL}"
+	# wget -O ${DOCKERVERSION}.tgz ${DOWNLOADURL}
+	# tar xzvf $DOCKERVERSION.tgz
+	# sudo mv docker/* /usr/bin/
+	# echo "Moving docker binaries on /usr/bin/"
+	# sleep 2
+	# echo "Start Docker daemon..."
+	# sudo dockerd &
+	# sleep 2
 	# echo "Post install docker (run docker without sudo)"
 	# Post install docker https://docs.docker.com/install/linux/linux-postinstall/
 	# Run docker without sudo

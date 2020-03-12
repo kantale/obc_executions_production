@@ -306,16 +306,16 @@ def run_wf():
     elif work_type == 'workflow':
         workflow_id = data['workflow_id']
         dag_contents = get_workflow_OBC_rest(callback,name,edit,workflow_id)
-        try:
-            if dag_contents['success']!='failed':
-                generate_file(workflow_id,dag_contents['dag'])
-                payload['status']=dag__trigger(workflow_id,name,edit)
-            else:
-                payload['status']='failed'
-                payload['reason']=dag_contents
-        except KeyError:
-            print_f('Dag not found')
-            payload=dag_contents
+        # try:
+        if dag_contents['success']!='failed':
+            generate_file(workflow_id,dag_contents['dag'])
+            payload['status']=dag__trigger(workflow_id,name,edit)
+        else:
+            payload['status']='failed'
+            payload['reason']=dag_contents
+        # except KeyError:
+        #     print_f('Dag not found')
+        #     payload=dag_contents
     else:
         payload['status']="failed"
         payload['error']="Unknown type (worfkflow or tool)"
