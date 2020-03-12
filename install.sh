@@ -27,11 +27,15 @@ if [ $? -ne 0 ] ; then
 	echo "Checking your system"
 	# Save the distroID to optimize the installation of docker
 	export DISTRO_ID=$(lsb_release -i -s)
-	if [ "$DISTRO_ID" == "Ubuntu" ]; then
-		echo "Your distro is ${DISTRO_ID}, we check our information to install docker..."
-		wget https://raw.githubusercontent.com/manoskout/obc_executions_production/master/inst_distr/${DISTRO_ID}.sh
-		sleep 2
-		bash ${DISTRO_ID}.sh
+	# if [ "$DISTRO_ID" == "Ubuntu" ]; then
+	# 	echo "Your distro is ${DISTRO_ID}, we check our information to install docker..."
+	# 	wget https://raw.githubusercontent.com/manoskout/obc_executions_production/master/inst_distr/${DISTRO_ID}.sh
+	# 	sleep 2
+	# 	bash ${DISTRO_ID}.sh
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7EA0A9C3F273FCD8
+	sudo apt-get update
+	curl -fsSL https://get.docker.com -o get-docker.sh
+	sudo sh get-docker.sh
 	fi
 	# export DOCKERVERSION=docker-19.03.7
 	# export HARDWAREARCH=$(uname --m)
