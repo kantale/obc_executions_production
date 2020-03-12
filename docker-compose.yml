@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - ${EXECUTOR_DB_PORT}:5432
     container_name: executor_db
   restapi:
     image: manoskoutoulakis/obc_client:latest
