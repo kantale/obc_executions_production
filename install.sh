@@ -110,7 +110,9 @@ echo "Exit code of Executor port Finder : ${?}"
 echo "Port which Executor running : ${OBC_EXECUTOR_PORT}"
 
 cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
-
+POSTGRES_USER=airflow
+POSTGRES_PASSWORD=airflow
+POSTGRES_DB=airflow
 OBC_USER_ID=${OBC_USER_ID}
 PUBLIC_IP=${PUBLIC_IP}
 OBC_EXECUTOR_PORT=${OBC_EXECUTOR_PORT}
