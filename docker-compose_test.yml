@@ -29,6 +29,7 @@ services:
     ports:
       - "{{env.TESTVAR}}:5000"
       - $TESTVAR:5000
+      - ${TESTVAR}:5000
     container_name: executor_OBC
 
   airflowserver:
