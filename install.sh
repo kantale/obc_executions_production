@@ -11,6 +11,15 @@
 
 # Check if docker exist in your environment
 
+#FOR SETTING COLORS IN OUTPUTS OF ECHO
+
+# RED='\033[0;31m'
+NC='\033[0m' # No Color
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+LGREEN='\033[1;32m'
+
+
 echo "Welcome to the OpenBio Executor, ${USER}!"
 echo "Installation will take a few minutes. Please be patient..."
 
@@ -46,8 +55,8 @@ if [ $? -ne 0 ] ; then
 fi
 
 echo "State 3/3 (Setting up variables and installing the OpenBio Executor) "
-
-export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor"
+export EXECUTOR_INSTANCE="mains"
+export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor_${EXECUTOR_INSTANCE}"
 
 echo "Set installation path on your environment: ${OBC_EXECUTOR_PATH}" 
 # Generate the installation file
@@ -110,6 +119,7 @@ echo "Exit code of Executor port Finder : ${?}"
 echo "Port which Executor running : ${OBC_EXECUTOR_PORT}"
 
 cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
+EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
 POSTGRES_USER=airflow
 POSTGRES_PASSWORD=airflow
 POSTGRES_DB=airflow
@@ -127,26 +137,21 @@ sudo docker-compose up -d
 if [ $? -eq 0 ] ; then 
 
 	export OBC_EXECUTOR_URL="http://${PUBLIC_IP}:${OBC_EXECUTOR_PORT}/${OBC_USER_ID}"
-	echo -e "\033[38;2;0;255;0m\n\n\n Successful installation \n\n\n\033[0m"
-	echo -e "\033[38;2;0;255;0m Close tests \033[0m"
-	#sudo docker-compose down
-	echo -e "\n\n\n\n\n"
-	echo ${OBC_EXECUTOR_URL} | xsel -ib
-	echo -e "\033[38;2;0;255;0m**IMPORTANT**\033[0m"
-	echo -e "\033[38;2;0;255;100m
-	Copy this link below in OpenBioC Settings to confirm the connection: 
-	(Link have automatically copied)
-	\033[0m
+	echo -e "${GREEN}\n\n\n Successful installation \n\n\n\Close tests \n\n ${OBC_EXECUTOR_URL}${NC}"
+	echo -e "${YELLOW}**IMPORTANT**${NC}"
+	echo -e "${GREEN}\n\tCopy this link below in OpenBioC Settings to confirm the connection: \n${NC}"
+	echo -e "${LGREEN}${OBC_EXECUTOR_URL}${NC}"
+
+	echo -e "${YELLOW}
+	The executor already running on your system. If you like to kill the service simply run:
+		$ docker-compose -f ${OBC_EXECUTOR_PATH} down
+		or, if you like to make some changes on docker-compose.yml or on airflow.cfg file:
+		$ cd ${OBC_EXECUTOR_PATH}  
+
+	${NC}
 	"
-	echo -e "\033[48;2;0;255;0m
-	\033[38;2;0;0;0m${OBC_EXECUTOR_URL}\033[0m
-	\033[0m"
 else
-#	echo "Subnet already in use..."
-#        echo "Remove networks"
-#	docker network prune
-#        docker-compose up -d
-#        echo "service run test  code -> " $?
+	echo "Something goes wrong.. Close the service!"
 	sudo docker-compose down
 fi
 

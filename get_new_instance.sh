@@ -14,8 +14,9 @@ echo "Installation of new will take a few minutes. Please be patient..."
 echo "State 1/3 (generate files and check used ports)"
 
 #TODO --> get the number of instance according the instance that already created
-export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor_instance_1"
 export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
+export EXECUTOR_INSTANCE=4
+export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor_instance_${EXECUTOR_INSTANCE}"
 
 mkdir -p ${OBC_EXECUTOR_PATH}
 
@@ -72,7 +73,7 @@ echo "Exit code of Executor port Finder : ${?}"
 echo "Port which Executor running : ${EXECUTOR_DB_PORT}"
 
 sudo cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
-EXECUTOR_INSTANCE=5
+EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
 POSTGRES_USER=airflow
 POSTGRES_PASSWORD=airflow
 POSTGRES_DB=airflow
@@ -88,6 +89,7 @@ EOF
 # To do specify tha on the main docker-compose.yml
 
 wget -O ${OBC_EXECUTOR_PATH}/docker-compose.yml https://raw.githubusercontent.com/manoskout/obc_executions_production/master/docker-compose.yml
+wget -O ${OBC_EXECUTOR_PATH}/airflow.cfg https://raw.githubusercontent.com/manoskout/obc_executions_production/master/airflow.cfg
 
 
 

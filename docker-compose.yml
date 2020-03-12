@@ -67,15 +67,4 @@ volumes:
   dagvolume:
   reportvolume:
   loggingvolume:
-# networks:
-#   #Communication between client and airflow restapi
-#   # 172.18.0.4 --> client IP
-#   # 172.18.0.5 --> airflow IP
-#   air_rest:
-#     driver: bridge
-#     ipam:
-#       driver: default
-#       config:
-#       - subnet: 172.18.0.0/16
-#   # Communication with all services 
-#   main_net:
+
