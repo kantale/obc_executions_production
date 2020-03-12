@@ -71,7 +71,8 @@ done
 echo "Exit code of Executor port Finder : ${?}"
 echo "Port which Executor running : ${EXECUTOR_DB_PORT}"
 
-cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
+sudo cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
+EXECUTOR_INSTANCE=5
 POSTGRES_USER=airflow
 POSTGRES_PASSWORD=airflow
 POSTGRES_DB=airflow
