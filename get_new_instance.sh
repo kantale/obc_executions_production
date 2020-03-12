@@ -146,7 +146,8 @@ volumes:
   loggingvolume:
 
 EOF
-
+echo "Files generated ..."
+cd ${OBC_EXECUTOR_PATH}
 sudo docker-compose up -d
 if [ $? -eq 0 ] ; then 
 

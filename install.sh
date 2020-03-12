@@ -36,7 +36,7 @@ if [ $? -ne 0 ] ; then
 	sudo apt-get update
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
-	fi
+
 	# export DOCKERVERSION=docker-19.03.7
 	# export HARDWAREARCH=$(uname --m)
 	# export DOWNLOADURL=https://download.docker.com/linux/static/stable/${HARDWAREARCH}/${DOCKERVERSION}.tgz
