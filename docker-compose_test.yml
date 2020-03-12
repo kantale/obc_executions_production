@@ -1,0 +1,80 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+  restapi:
+    image: manoskoutoulakis/obc_client:latest
+    environment:
+      - OBC_USER_ID=${OBC_USER_ID}
+      - PUBLIC_IP=${PUBLIC_IP}
+    depends_on:
+      - postgres
+      - airflowserver
+    restart: always
+    volumes:
+      # docker connect with client to get info or execute commands
+#      - /var/run/docker.sock:/var/run/docker.sock
+      # Uncomment only for production purposes 
+      # - ./client/client.py:/code/client.py
+      - dagvolume:/code/dags
+      - reportvolume:/code/REPORTS
+      - loggingvolume:/code/REPORTS/logs
+      - ./client/compressed_logs:/code/REPORTS/compressed_logs
+    ports:
+      - "${TESTVAR}:5000"
+    container_name: executor_OBC
+
+  airflowserver:
+    image: manoskoutoulakis/docker-obc-airflow:1.10.9
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+      - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
+    volumes:
+      - dagvolume:/usr/local/airflow/dags
+      # Folder where airflow should store its log files
+      - loggingvolume:/usr/local/airflow/logs
+      # Configuration File
+      - ./airflow.cfg:/usr/local/airflow/airflow.cfg
+ #     - /var/run/docker.sock:/var/run/docker.sock
+      # Folders which contains outputs,data,steps(bash files) of all the finished dags 
+      - reportvolume:/usr/local/airflow/REPORTS
+      
+      # For custom plugins
+      # - ./plugins:/usr/local/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: webserver
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 15s
+      timeout: 15s
+      retries: 3
+    container_name: executor_airflow_runner
+
+volumes:
+  # client-airflow dags volume
+  dagvolume:
+  reportvolume:
+  loggingvolume:
+# networks:
+#   #Communication between client and airflow restapi
+#   # 172.18.0.4 --> client IP
+#   # 172.18.0.5 --> airflow IP
+#   air_rest:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#       - subnet: 172.18.0.0/16
+#   # Communication with all services 
+#   main_net:
