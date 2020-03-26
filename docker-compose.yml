@@ -50,7 +50,6 @@ services:
       - OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
       - EXECUTOR_DB_PORT=${EXECUTOR_DB_PORT}
       - FLASK_ENV=development
-      - NETDATA_ID=${NETDATA_ID}
     volumes:
       # Folder where airflow should store files
       - dagvolume:/usr/local/airflow/dags
