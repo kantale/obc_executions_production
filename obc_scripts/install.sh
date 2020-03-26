@@ -41,10 +41,10 @@ if [ $? -ne 0 ] ; then
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 fi
-sudo groupadd docker
-sudo usermod -aG docker $USER
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "$HOME/.docker" -R
+#sudo groupadd docker
+#sudo usermod -aG docker $USER
+#sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+#sudo chmod g+rwx "$HOME/.docker" -R
 echo "State 2/3 (Install docker-compose) "
 
 echo "Check if docker already exists..."
@@ -145,7 +145,7 @@ EOF
 
 #TODO -> change using docker-compose up -f asfsedfsdf.yml(FAILED)
 cd ${OBC_EXECUTOR_PATH}
-docker-compose up -d
+sudo docker-compose up -d
 # eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose.yml up -d
 
 if [ $? -eq 0 ] ; then 
@@ -167,8 +167,9 @@ if [ $? -eq 0 ] ; then
 
 	${NC}
 	"
+        sudo docker-compose down
 else
 	echo "Something goes wrong.. Close the service!"
-	docker-compose down
+	sudo docker-compose down
 fi
 
