@@ -140,7 +140,7 @@ EOF
 #TODO -> change using docker-compose up -f asfsedfsdf.yml
 # cd ${OBC_EXECUTOR_PATH}
 # sudo docker-compose up -d
-eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose up -d
+eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose.yml up -d
 
 if [ $? -eq 0 ] ; then 
 
@@ -160,6 +160,6 @@ if [ $? -eq 0 ] ; then
 	"
 else
 	echo "Something goes wrong.. Close the service!"
-	eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose down
+	eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose.yml down
 fi
 
