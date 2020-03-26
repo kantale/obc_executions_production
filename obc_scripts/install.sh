@@ -148,7 +148,10 @@ sudo docker-compose up -d
 if [ $? -eq 0 ] ; then 
 
 	export OBC_EXECUTOR_URL="http://${PUBLIC_IP}:${OBC_EXECUTOR_PORT}/${OBC_USER_ID}"
+	export NETDATA_URL="http://${PUBLIC_IP}:${NETDATA_MONITORING_PORT}/${NETDATA_ID}"
 	echo -e "${GREEN}\n\n\n Successful installation \n\n\n\Close tests \n\n ${OBC_EXECUTOR_URL}${NC}"
+	echo -e "${GREEN}\n Netdata url : ${OBC_EXECUTOR_URL}${NC}"
+
 	echo -e "${YELLOW}**IMPORTANT**${NC}"
 	echo -e "${GREEN}\n\tCopy this link below in OpenBioC Settings to confirm the connection: \n${NC}"
 	echo -e "${LGREEN}${OBC_EXECUTOR_URL}${NC}"
