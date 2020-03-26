@@ -41,7 +41,11 @@ if [ $? -ne 0 ] ; then
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 fi
-
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker 
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
 echo "State 2/3 (Install docker-compose) "
 
 echo "Check if docker already exists..."
@@ -150,8 +154,8 @@ if [ $? -eq 0 ] ; then
 	export OBC_EXECUTOR_URL="http://${PUBLIC_IP}:${OBC_EXECUTOR_PORT}/${OBC_USER_ID}"
 	export NETDATA_URL="http://${PUBLIC_IP}:${NETDATA_MONITORING_PORT}/${NETDATA_ID}"
 	echo -e "${GREEN}\n\n\n Successful installation \n\n\n\Close tests \n\n ${OBC_EXECUTOR_URL}${NC}"
-	echo -e "${GREEN}\n Netdata url : ${OBC_EXECUTOR_URL}${NC}"
-
+	
+	echo -e "${GREEN}\n\n\n Netdata url : ${NETDATA_URL}${NC}"
 	echo -e "${YELLOW}**IMPORTANT**${NC}"
 	echo -e "${GREEN}\n\tCopy this link below in OpenBioC Settings to confirm the connection: \n${NC}"
 	echo -e "${LGREEN}${OBC_EXECUTOR_URL}${NC}"
