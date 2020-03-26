@@ -503,7 +503,9 @@ def monitoring_dashboard():
            failed_dags=failed_dags,
            suc_dags=suc_dags,
            dags_info=dags_info,
-           obc_user_id=os.environ['OBC_USER_ID'])
+           obc_user_id=os.environ['OBC_USER_ID'],
+           netdata_id=os.environ['NETDATA_ID']
+           )
 
 
 @app.route(f"/{os.environ['OBC_USER_ID']}/executor_info")

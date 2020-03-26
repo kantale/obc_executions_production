@@ -16,8 +16,8 @@ TRY_LOOP="20"
 if [[ -z "$AIRFLOW__CORE__LOAD_EXAMPLES" && "${LOAD_EX:=n}" == n ]]; then
   AIRFLOW__CORE__LOAD_EXAMPLES=False
 fi
-chmod -R 755 ${AIRFLOW_HOME}/templates/*
-chmod 755 ${AIRFLOW_HOME}/client.py
+#chmod -R 755 ${AIRFLOW_HOME}/templates/*
+#chmod 755 ${AIRFLOW_HOME}/client.py
 #chmod 755 /var/run/docker.sock
 # FIX DOCKER PY PROBLEM 
 #groupadd docker
@@ -29,15 +29,6 @@ export \
   AIRFLOW__CORE__FERNET_KEY \
   AIRFLOW__CORE__LOAD_EXAMPLES \
 
-# Install custom python package if requirements.txt is present
-if [ -e "/requirements.txt" ]; then
-    $(command -v pip) install --user -r /requirements.txt
-fi
-
-# Install plugins if plugins.sh is present
-if [ -e "/plugins.sh"]; then
-    bash plugins.sh
-fi
 
 wait_for_port() {
   local name="$1" host="$2" port="$3"

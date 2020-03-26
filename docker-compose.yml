@@ -38,6 +38,7 @@ services:
       - EXECUTOR=Local
       - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
       #OBC Client environment variables
+      - NETDATA_ID=${NETDATA_ID}
       - OBC_USER_ID=${OBC_USER_ID}
       - PUBLIC_IP=${PUBLIC_IP}
       - EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
@@ -49,6 +50,7 @@ services:
       - OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
       - EXECUTOR_DB_PORT=${EXECUTOR_DB_PORT}
       - FLASK_ENV=development
+      - NETDATA_ID=${NETDATA_ID}
     volumes:
       # Folder where airflow should store files
       - dagvolume:/usr/local/airflow/dags

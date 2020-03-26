@@ -93,7 +93,7 @@ RUN \
     && usermod -u ${DOCKER_UID} airflow \
     && echo "Set airflow's uid to ${DOCKER_UID}"
 
-USER airflow
+#USER airflow
 RUN mkdir -m777 ${AIRFLOW_USER_HOME}/dags
 RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS
 RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS/WORK
