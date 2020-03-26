@@ -1,6 +1,6 @@
 import os
 import urllib
-from flask import Flask, request, jsonify, send_file, send_from_directory, safe_join, abort
+from flask import Flask, request, Response, redirect, jsonify, send_file, send_from_directory, safe_join, abort, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import json
@@ -15,7 +15,46 @@ import shutil
 import sys
 #Communicate with airflow database
 import pg8000
+'''
+SOME USEFULL VARIABLES TO WORK WITH
+  OBC_USER_ID=${OBC_USER_ID}
+  PUBLIC_IP=${PUBLIC_IP}
+  EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
+  POSTGRES_USER=${POSTGRES_USER}
+  POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  POSTGRES_DB=${POSTGRES_DB}
+  NETDATA_MONITORING_PORT=${NETDATA_MONITORING_PORT}
+  OBC_EXECUTOR_PORT=${OBC_EXECUTOR_PORT}
+  OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
+  EXECUTOR_DB_PORT=${EXECUTOR_DB_PORT}
 
+  TODO -> FUTURE CHANGES
+  EXECUTORS_VARIABLES={
+    "general":{
+        "NETDATA_MONITORING_PORT":"19999",
+        "OBC_EXECUTOR_PORT":"5000",
+        "PUBLIC_IP":"213.239.220.77"
+    },
+    "bcaf97d51ff173e5f6723fa55e5a0d5c":
+    {
+        "EXECUTOR_INSTANCE":"production",
+        "POSTGRES_USER":"airflow",
+        "POSTGRES_PASSWORD":"airflow",
+        "POSTGRES_DB":"airflow",
+        "OBC_AIRFLOW_PORT":"8080",
+        "EXECUTOR_DB_PORT":"5432"
+    },
+    "0000000000002245f672awgb3axc2568":
+    {
+        "EXECUTOR_INSTANCE":"test1",
+        "POSTGRES_USER":"aircow",
+        "POSTGRES_PASSWORD":"aircow",
+        "POSTGRES_DB":"aircow",
+        "OBC_AIRFLOW_PORT":"8081",
+        "EXECUTOR_DB_PORT":"5433"
+    }
+}
+'''
 def print_f(message):
     '''
     For debug scopes
@@ -27,6 +66,7 @@ def docker_setups():
     NOT USED
     Connect with docker api
     '''
+    print_f("aaaa")
     client = docker.from_env()
     return client
 
@@ -37,11 +77,11 @@ def connect_to_airflow_db():
     Connect to airflow Postgresql and allow us execute query from obc_client
     '''
     conn = pg8000.connect(
-        database="airflow",
-        user="airflow", 
-        password="airflow",
+        database=os.environ['POSTGRES_DB'],
+        user=os.environ['POSTGRES_USER'], 
+        password=os.environ['POSTGRES_PASSWORD'],
         host=os.environ['PUBLIC_IP'],
-        port=5432)
+        port=int(os.environ['EXECUTOR_DB_PORT']))
 
     return conn
 
@@ -52,7 +92,7 @@ def execute_query(query):
     conn = connect_to_airflow_db()
     cursor= conn.cursor()
     result = cursor.execute(query)
-    return result.fetchall()
+    return result
 
 
 app = Flask(__name__)
@@ -64,11 +104,11 @@ if __name__ == '__main__':
     
 
 # Dag_directory
-dag_directory = "/code/dags/"
+dag_directory = f"{os.environ['AIRFLOW_HOME']}/dags/"
 #not fixed we use tha same dir for tool and workflows
 # dag_wf_directory = "dags/wf/"
 # dag_tl_directory = "dags/tool/"
-compressed_logfiles = "compressed_logs/"
+compressed_logfiles = f"{os.environ['AIRFLOW_HOME']}/logs/compressed_logs/"
 
 def create_filename(id):
     '''
@@ -114,7 +154,7 @@ def delete_from_airflow(dag_name):
     '''
     Delete the dag from airflow Database
     '''
-    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_name}"
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{dag_name}"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -225,7 +265,7 @@ def dag__trigger(id,name,edit):
     which communicate both airflow and OBC_client
     '''
     ret = {}
-    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{id}/dag_runs"
+    url = f"http://0.0.0.0:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{id}/dag_runs"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -319,6 +359,10 @@ def run_wf():
     else:
         payload['status']="failed"
         payload['error']="Unknown type (worfkflow or tool)"
+        # Set executor url 
+    payload["executor_url"]=f"http://{os.environ['PUBLIC_IP']}:{os.environ['OBC_AIRFLOW_PORT']}/{os.environ['OBC_USER_ID']}"
+    payload["monitor_url"]=f"http://{os.environ['PUBLIC_IP']}:{os.environ['OBC_EXECUTOR_PORT']}/{os.environ['OBC_USER_ID']}/monitoring"
+    # print_f(f"{pa}"
     return json.dumps(payload)
 
 
@@ -337,7 +381,7 @@ def get_status_of_workflow(dag_id):
 
     '''
 
-    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_id}/dag_runs"
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{dag_id}/dag_runs"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -349,14 +393,15 @@ def get_status_of_workflow(dag_id):
     
 
     # print_f("---> Response from airflow : ")
-
-    paused_dags = [reg[0] for reg in execute_query("SELECT dag_id FROM dag WHERE is_paused")]
+    # Check from database if the dag is changed! If it is ch
+    paused_dags = [reg[0] for reg in execute_query("SELECT dag_id FROM dag WHERE is_paused").fetchall()]
     print_f(f"Paused dags : {paused_dags}")
     if response.ok == True:
         res=response.json()
         if dag_id in paused_dags:
             for dag in res:
                 dag["state"]='paused'
+
         print_f(response.json())
     else:
         print_f("DAG NOT FOUND")
@@ -375,15 +420,15 @@ def downloadFile(dag_id):
         filename : the name of file which the user want to download
         TODO -> Change in the future the filename because of replaced by compressed file that contains all results
     '''
-    downloaded_path=f"/code/REPORTS/WORK/{dag_id}.tgz"
+    downloaded_path=f"{os.environ['AIRFLOW_HOME']}/REPORTS/WORK/{dag_id}.tgz"
     return send_file(downloaded_path, as_attachment=True)
 
 def create_zipfile(content_path,zipped_path,name):
     '''
     The main usage of this function is to generate zip file containing logs from dag which they run.
     The log files are seperated into a folders, every folder was named according to the steps of dag.
-    Path of logs /code/REPORTS/logs/<dag_id>/
-    Path of compressed logs /code/REPORTS/logs/<dag_id>/<dag_id.zip>
+    Path of logs /REPORTS/logs/<dag_id>/
+    Path of compressed logs /REPORTS/logs/<dag_id>/<dag_id.zip>
     log_path = source of log folder
     zipped_path = source of zipped logs to be saved
     zipfile_name = is the name of dag (<dag_id>.zip)
@@ -402,8 +447,8 @@ def getLogs(dag_id):
         The logs of execution are seperated in different files (file per step)
         dag_id : the name of dag
     '''
-    log_path= f"/code/REPORTS/logs/{dag_id}" 
-    destination_log_path = f"/code/REPORTS/compressed_logs"
+    log_path= f"{os.environ['AIRFLOW_HOME']}/logs/{dag_id}" 
+    destination_log_path = f"{os.environ['AIRFLOW_HOME']}/logs/compressed_logs"
     
     download_path= create_zipfile(log_path,destination_log_path,dag_id)
     return send_file(download_path, as_attachment=True)
@@ -415,7 +460,7 @@ def pause_workfow(dag_id,status):
     ‘<string:status>’ must be a ‘true’ to pause a DAG and ‘false’ to unpause.
     '''
 
-    url = f"http://{os.environ['PUBLIC_IP']}:8080/api/experimental/dags/{dag_id}/paused/{status}"
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{dag_id}/paused/{status}"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
@@ -425,5 +470,59 @@ def pause_workfow(dag_id,status):
     print_f("---> Response from airflow : ")
     return response.json()
 
+def get_executor_id():
+    '''
+    When Netdata works as a container other containers which monitoring are with containers id
+    To fix this problem we connect docker socket in executor container and we get the id of specific airflow container
+    '''
+    client=docker_setups()
+    executor_name= f"executor_airflow_{os.environ['EXECUTOR_INSTANCE']}"
+    return executor_name,client.containers.get(executor_name).id[0:12]
 
 
+
+@app.route(f"/{os.environ['OBC_USER_ID']}/monitoring")
+def monitoring_dashboard():
+    """
+    Landing page.
+    """
+    dags_info = [{'status': 'Total','out': f"{execute_query('SELECT COUNT(1) FROM dag').fetchone()[0]}"},
+           {'status': 'Running','out': f"{execute_query('SELECT COUNT(1) FROM dag_run').fetchone()[0]}"},
+           {'status': 'Paused','out': f"{execute_query('SELECT COUNT(1) FROM dag WHERE is_paused').fetchone()[0]}"}]
+    # PUBLIC_IP=os.environ['PUBLIC_IP']
+    suc_dags={'status':'Succeed', 'out':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'success'").fetchone()[0]}
+    failed_dags={'status':'Failed', 'out':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'failed'").fetchone()[0]}
+    print_f(f"{os.environ['PUBLIC_IP']}")
+    executor_name, executor_id= get_executor_id()
+    return render_template('index.html',
+           title="OBC Executor Monitoring",
+           public_ip=os.environ['PUBLIC_IP'],
+           netdata_port=os.environ['NETDATA_MONITORING_PORT'], #TODO MAKE IT ENVIRONMENT VARIABLE
+           executor_id=executor_id,
+           executor_name=executor_name,
+           failed_dags=failed_dags,
+           suc_dags=suc_dags,
+           dags_info=dags_info,
+           obc_user_id=os.environ['OBC_USER_ID'])
+
+
+@app.route(f"/{os.environ['OBC_USER_ID']}/executor_info")
+def dags_data():
+    '''
+    Get real time data relative of dags status
+    '''
+    def get_dag_data():
+        while True:
+            json_data= json.dumps(
+                {   
+                    # 'time':datetime.now(),
+                    'total':execute_query('SELECT COUNT(1) FROM dag').fetchone()[0],
+                    'running':execute_query('SELECT COUNT(1) FROM dag_run').fetchone()[0],
+                    'paused':execute_query('SELECT COUNT(1) FROM dag WHERE is_paused').fetchone()[0],
+                    'succeed':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'success'").fetchone()[0],
+                    'failed':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'failed'").fetchone()[0]
+                })
+            yield f"data:{json_data}\n\n"
+
+            time.sleep(10)
+    return Response(get_dag_data(), mimetype='text/event-stream')

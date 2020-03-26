@@ -1,0 +1,36 @@
+{% block dag_status %}
+
+<!-- <header>
+    <a>Executors</a>
+</header>
+<div class="nav flex-column" >
+
+    <div class="nav-item"style="column-count:1;">    
+        <a class="nav-link">aaaa</a>
+        <a class="nav-link">aaa</a>
+    </div>
+</div>
+ -->
+<header>
+    <a>Dags status</a>
+</header>   
+<div class="nav flex-column" >
+{% for item in dags_info %}
+    <div class="nav-item">    
+        <a id="{{item.status}}" class="nav-link">{{item.status}}:</a>
+        <a id="{{item.status}}_num" class="nav-link">{{item.out}}</a>
+    </div>
+
+{% endfor %} 
+    <div class="nav-item">
+        <a id="{{suc_dags.status}}" class="nav-link">{{suc_dags.status}}:</a>
+        <a id="{{suc_dags.status}}_num" class="nav-link">{{suc_dags.out}}</a>
+    </div>
+    <div class="nav-item">
+        <a id="{{failed_dags.status}}" class="nav-link">{{failed_dags.status}}:</a>
+        <a id="{{failed_dags.status}}_num" class="nav-link">{{failed_dags.out}}</a>
+    </div>
+</div>
+
+{% endblock %}
+

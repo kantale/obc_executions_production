@@ -1,0 +1,24 @@
+
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    
+      {% include 'dag_status.html' %}
+
+      {% block dag_status %}{% endblock%}
+  </div>
+  <!-- Content -->
+  <div id="content">
+    <nav class="navbar navbar-default">
+        <div class="nav navbar-nav">
+          <a>{{title}}</a>
+        </div>
+    </nav>
+    <div class="container-fluid">
+
+        {% include 'monitoring.html' %}
+
+        {% block monitoring %}{% endblock%}
+    </div>
+  </div>
+</div>

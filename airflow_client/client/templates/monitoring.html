@@ -1,0 +1,92 @@
+{% block monitoring %}
+<div class="container-fluid">
+    <div class="card text-center">
+        <div class="card-body">
+            <div data-netdata="cgroup_{{executor_id}}.cpu"
+            data-title="CPU usage"
+            data-decimal-digits="0"
+            data-chart-library="gauge"
+            data-width="20%"
+            data-height="100%"
+            data-after="-300"
+            data-points="300"
+            ></div>
+            <div data-netdata="cgroup_{{executor_id}}.mem_usage"
+            data-title="RAM"
+            data-decimal-digits="0"
+            data-chart-library="gauge"
+            data-width="20%"
+            data-height="100%"
+            data-after="-300"
+            data-points="300"
+            ></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header"><b>CPU usage</b></div>
+        <div class="card-body">
+            <div data-netdata="cgroup_{{executor_id}}.cpu"
+            data-title="CPU usage"
+            data-width="500"
+            data-height="300"
+            ></div>
+            <div data-netdata="cgroup_{{executor_id}}.cpu_limit"
+            data-title="CPU Usage within the limits"
+            data-width="500"
+            data-height="300"
+            ></div>
+            <div data-netdata="cgroup_{{executor_id}}.cpu_per_core"
+            data-title="CPU Usage Per Core"
+            data-width="500"
+            data-height="300"
+            ></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header"><b>RAM usage</b></div>
+        <div class="card-body">
+            <div data-netdata="cgroup_{{executor_id}}.mem_usage_limit"
+             data-title="Used RAM without Cache within the limits"
+             data-width="500"
+             data-height="300"
+             ></div>
+
+
+            <div data-netdata="cgroup_{{executor_id}}.mem_usage"
+            data-title="Used Memory without Cache"
+             data-width="500"
+             data-height="300"
+             ></div>
+
+            <div data-netdata="cgroup_{{executor_id}}.mem"
+             data-title="Memory Usage"
+             data-width="500"
+             data-height="300"
+             ></div>
+             <hr>
+             <div data-netdata="cgroup_{{executor_id}}.writeback"
+             data-title="Writeback Memory"
+             data-width="500"
+             data-height="300"
+             ></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header"><b>Disk usage</b></div>
+        <div class="card-body">
+            <div data-netdata="cgroup_{{executor_id}}.io"
+             data-title="I/O Bandwidth"
+             data-width="500"
+             data-height="300"
+             ></div>
+
+
+            <div data-netdata="cgroup_{{executor_id}}.throttle_io"
+             data-title="Throttle I/O Bandwidth"
+             data-width="500"
+             data-height="300"
+             ></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
