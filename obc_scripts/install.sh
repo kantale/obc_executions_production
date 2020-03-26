@@ -135,6 +135,7 @@ OBC_EXECUTOR_PORT=$(portfinder $OBC_EXECUTOR_PORT)
 OBC_AIRFLOW_PORT=$(portfinder $OBC_AIRFLOW_PORT)
 NETDATA_MONITORING_PORT=$(portfinder $NETDATA_MONITORING_PORT)
 EXECUTOR_DB_PORT=$(portfinder $EXECUTOR_DB_PORT)
+NETDATA_ID=$(dbus-uuidgen)
 EOF
 
 #TODO -> change using docker-compose up -f asfsedfsdf.yml(FAILED)

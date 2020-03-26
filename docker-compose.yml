@@ -2,6 +2,8 @@ version: '3'
 services:
   netdata_monitor:
     image: manoskoutoulakis/netdata_nginx:latest
+    environment:
+      - ID=${NETDATA_ID}
     ports:
       - 19998:19998
     volumes:
