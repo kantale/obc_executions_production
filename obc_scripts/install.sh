@@ -75,12 +75,14 @@ mkdir -p ${OBC_EXECUTOR_PATH}
 echo "Make dir exit code"
 echo $?
 export OBC_USER_ID=$(dbus-uuidgen)
+export NETDATA_ID=$(dbus-uuidgen)
 
 if [ $? -eq 1 ] ; then
 	echo "uuidgen is not installed"
 	echo "uuidgen installation start...."
  	sudo apt-get install uuid-runtime
-	export ${OBC_USER_ID}=$(dbus-uuidgen)
+	export OBC_USER_ID=$(dbus-uuidgen)
+	export NETDATA_ID=$(dbus-uuidgen)
 fi
 
 # cd $OBC_EXECUTOR_PATH
@@ -135,7 +137,7 @@ OBC_EXECUTOR_PORT=$(portfinder $OBC_EXECUTOR_PORT)
 OBC_AIRFLOW_PORT=$(portfinder $OBC_AIRFLOW_PORT)
 NETDATA_MONITORING_PORT=$(portfinder $NETDATA_MONITORING_PORT)
 EXECUTOR_DB_PORT=$(portfinder $EXECUTOR_DB_PORT)
-NETDATA_ID=$(dbus-uuidgen)
+NETDATA_ID=${NETDATA_ID}
 EOF
 
 #TODO -> change using docker-compose up -f asfsedfsdf.yml(FAILED)
