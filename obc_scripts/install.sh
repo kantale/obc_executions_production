@@ -41,15 +41,15 @@ if [ $? -ne 0 ] ; then
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 fi
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker 
+#sudo groupadd docker
+#sudo usermod -aG docker $USER
+#newgrp docker 
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 echo "State 2/3 (Install docker-compose) "
 
 echo "Check if docker already exists..."
-docker-compose -v 1> /dev/null 2>&1
+docker-compose -v
 if [ $? -ne 0 ] ; then
 	echo "--> Docker-Compose is not installed, installation starts..."
 
