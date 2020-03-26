@@ -42,7 +42,7 @@ if [ $? -ne 0 ] ; then
 	sudo sh get-docker.sh
 fi
 #sudo groupadd docker
-#sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER
 #newgrp docker 
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
