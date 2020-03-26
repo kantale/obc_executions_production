@@ -1,5 +1,17 @@
 version: '3'
 services:
+  netdata_monitor:
+    image: manoskoutoulakis/netdata_nginx:latest
+    ports:
+      - 19998:19998
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    container_name: "obc_source_monitoring"
+    
   postgres:
     image: postgres:9.6
     environment:
@@ -8,10 +20,22 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "${EXECUTOR_DB_PORT}:5432"
-    container_name: "executor_db_${EXECUTOR_INSTANCE}"
-  restapi:
-    image: manoskoutoulakis/obc_client:latest
+    container_name: "local_executor_db_${EXECUTOR_INSTANCE}"
+
+  airflowserver:
+    image: manoskoutoulakis/docker-obc-airflow:1.10.9
+    restart: always
+    depends_on:
+      - postgres
+      - netdata_monitor
     environment:
+      #Airflow configuration
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:${EXECUTOR_DB_PORT}/airflow
+      - AIRFLOW__WEBSERVER__BASE_URL=http://localhost:8080/${OBC_USER_ID}
+      - LOAD_EX=n
+      - EXECUTOR=Local
+      - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
+      #OBC Client environment variables
       - OBC_USER_ID=${OBC_USER_ID}
       - PUBLIC_IP=${PUBLIC_IP}
       - EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
@@ -22,46 +46,20 @@ services:
       - OBC_EXECUTOR_PORT=${OBC_EXECUTOR_PORT}
       - OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
       - EXECUTOR_DB_PORT=${EXECUTOR_DB_PORT}
-    depends_on:
-      - postgres
-      - airflowserver
-    restart: always
+      - FLASK_ENV=development
     volumes:
-      # docker connect with client to get info or execute commands
-#      - /var/run/docker.sock:/var/run/docker.sock
-      # Uncomment only for production purposes 
-      # - ./client/client.py:/code/client.py
-      - dagvolume:/code/dags
-      - reportvolume:/code/REPORTS
-      - loggingvolume:/code/REPORTS/logs
-      - ./client/compressed_logs:/code/REPORTS/compressed_logs
-    ports:
-      - "${OBC_EXECUTOR_PORT}:5000"
-    container_name: "executor_${EXECUTOR_INSTANCE}"
-
-  airflowserver:
-    image: manoskoutoulakis/docker-obc-airflow:1.10.9
-    restart: always
-    depends_on:
-      - postgres
-    environment:
-      - LOAD_EX=n
-      - EXECUTOR=Local
-      - FERNET_KEY=jsDPRErfv8Z_eVTnGfF8ywd19j4pyqE3NpdUBA_oRTo=
-    volumes:
+      # Folder where airflow should store files
       - dagvolume:/usr/local/airflow/dags
-      # Folder where airflow should store its log files
-      - loggingvolume:/usr/local/airflow/logs
+      - logvolume:/usr/local/airflow/logs
+      - reportvolume:/usr/local/airflow/REPORTS
       # Configuration File
       - ./airflow.cfg:/usr/local/airflow/airflow.cfg
- #     - /var/run/docker.sock:/var/run/docker.sock
-      # Folders which contains outputs,data,steps(bash files) of all the finished dags 
-      - reportvolume:/usr/local/airflow/REPORTS
-      
+      - /var/run/docker.sock:/var/run/docker.sock
       # For custom plugins
-      # - ./plugins:/usr/local/airflow/plugins
+      #- ./plugins:/usr/local/airflow/plugins
     ports:
       - "${OBC_AIRFLOW_PORT}:8080"
+      - "${OBC_EXECUTOR_PORT}:5000"
     command: webserver
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
@@ -69,10 +67,14 @@ services:
       timeout: 15s
       retries: 3
     container_name: "executor_airflow_${EXECUTOR_INSTANCE}"
-
 volumes:
-  # client-airflow dags volume
+  # Dag volumes 
   dagvolume:
-  reportvolume:
-  loggingvolume:
+  logvolume:
+  reportvolume:  
+  
 
+
+
+
+#/usr/share/netdata/web --> dashboard.js

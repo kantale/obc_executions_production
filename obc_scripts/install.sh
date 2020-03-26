@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#
+# This bashscript work only on debian based distros
 #
 # This script will:
 # 1. Install all client dependencies
@@ -11,9 +11,9 @@
 
 # Check if docker exist in your environment
 
-#FOR SETTING COLORS IN OUTPUTS OF ECHO
+#SETTING COLORS FOR OUTPUTS OF ECHO
 
-# RED='\033[0;31m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
@@ -55,7 +55,18 @@ if [ $? -ne 0 ] ; then
 fi
 
 echo "State 3/3 (Setting up variables and installing the OpenBio Executor) "
-export EXECUTOR_INSTANCE="mains"
+
+
+# Set user input for executor name
+read -e -p "Enter your executor name: " EXECUTOR_INSTANCE
+if [ -z $EXECUTOR_INSTANCE ]; then 
+	export EXECUTOR_INSTANCE="main"
+	echo "Executor name is unset, take default value: main"; 
+else 
+	echo "Executor name is set : '$EXECUTOR_INSTANCE'"; 
+fi
+
+# Set OBC_EXECUTOR PATH
 export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor_${EXECUTOR_INSTANCE}"
 
 echo "Set installation path on your environment: ${OBC_EXECUTOR_PATH}" 
@@ -92,31 +103,26 @@ echo "Running Directory : $(pwd)"
 # Check if the pre-selected ports are in use 
 export OBC_AIRFLOW_PORT=8080
 export OBC_EXECUTOR_PORT=5000
-#TEST AIRFLOW PORT (DEFAULT 8080)
-# echo "Check if Airflow port : " $OBC_AIRFLOW_PORT "is in use..."
-sudo netstat -tulpn | grep ${OBC_AIRFLOW_PORT}
-while [ $? -eq 0 ] ;
-do
-	echo "Port : ${OBC_AIRFLOW_PORT} already exist ...."
-	# If the port Already exists check the previous_port + 1 (CHECK THAT)
-	export OBC_AIRFLOW_PORT=$(expr ${OBC_AIRFLOW_PORT} + 1 )
-	echo "New port check, in port : ${OBC_AIRFLOW_PORT}"
-	sudo netstat -tulpn | grep ${OBC_AIRFLOW_PORT}
-done
-echo "Exit code of Airflow port Finder : ${?}"
-echo "Port which Airflow running : ${OBC_AIRFLOW_PORT}"
+export EXECUTOR_DB_PORT=5432
+export NETDATA_MONITORING_PORT=19998
 
-#TEST EXECUTOR PORT (DEFAULT 5000)
-sudo netstat -tulpn | grep ${OBC_EXECUTOR_PORT}
-while [ $? -eq 0 ] ;
-do
-	echo "Port : ${OBC_EXECUTOR_PORT} already exist ...."
-	export OBC_EXECUTOR_PORT=$(expr ${OBC_EXECUTOR_PORT} + 1 )
-	echo "New port check, in port : ${OBC_EXECUTOR_PORT}"
-	sudo netstat -tulpn | grep ${OBC_EXECUTOR_PORT}
-done
-echo "Exit code of Executor port Finder : ${?}"
-echo "Port which Executor running : ${OBC_EXECUTOR_PORT}"
+# Check port function
+function portfinder (){
+	# local result
+	sudo netstat -tulpn | grep $1 > /dev/null 2>&1
+	while [ $? -eq 0 ] ;
+	do
+		# echo "Port : $1 already exist ...."
+		# If the port Already exists check the previous_port + 1 (CHECK THAT)
+		set -- $(expr $1 + 1) $1
+		# echo "New port check, in port : $1"
+		sudo netstat -tulpn | grep $1 > /dev/null 2>&1
+	done
+	# echo "Exit code of Airflow port Finder : ${?}"
+	# echo "Port which Airflow running : $1"
+	# return $1
+	echo $1
+}
 
 cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
 EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
@@ -125,15 +131,17 @@ POSTGRES_PASSWORD=airflow
 POSTGRES_DB=airflow
 OBC_USER_ID=${OBC_USER_ID}
 PUBLIC_IP=${PUBLIC_IP}
-OBC_EXECUTOR_PORT=${OBC_EXECUTOR_PORT}
-OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
-
+OBC_EXECUTOR_PORT=$(portfinder $OBC_EXECUTOR_PORT)
+OBC_AIRFLOW_PORT=$(portfinder $OBC_AIRFLOW_PORT)
+NETDATA_MONITORING_PORT=$(portfinder $NETDATA_MONITORING_PORT)
+EXECUTOR_DB_PORT=$(portfinder $EXECUTOR_DB_PORT)
 EOF
 
 #TODO -> change using docker-compose up -f asfsedfsdf.yml
-cd ${OBC_EXECUTOR_PATH}
+# cd ${OBC_EXECUTOR_PATH}
+# sudo docker-compose up -d
+eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose up -d
 
-sudo docker-compose up -d
 if [ $? -eq 0 ] ; then 
 
 	export OBC_EXECUTOR_URL="http://${PUBLIC_IP}:${OBC_EXECUTOR_PORT}/${OBC_USER_ID}"
@@ -152,6 +160,6 @@ if [ $? -eq 0 ] ; then
 	"
 else
 	echo "Something goes wrong.. Close the service!"
-	sudo docker-compose down
+	eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose down
 fi
 
