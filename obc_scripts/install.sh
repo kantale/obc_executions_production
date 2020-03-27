@@ -11,8 +11,8 @@
 
 # Check if docker exist in your environment
 
-#SETTING COLORS FOR OUTPUTS OF ECHO
-
+#SETTING COLORS FOR OUTPUTS
+WHITE='\e[97m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 YELLOW='\033[1;33m'
@@ -27,11 +27,11 @@ echo "State 1/3 (Install docker) "
 
 # Save the distroID to optimize the installation of docker
 export DISTRO_ID=$(lsb_release -i -s)
-echo "Check if docker already exists..."
+echo "[${YELLOW}-${NC}] Check if docker already exists..."
 # 1> /dev/null 2>&1 not show the output
 docker -v 1> /dev/null 2>&1
 if [ $? -ne 0 ] ; then 
-	echo "--> Docker is not installed, installation starts..."
+	echo "[${YELLOW}-${NC}] Docker is not installed, installation starts..."
 	sleep 2
 	# Save the distroID to optimize the installation of docker
 	export DISTRO_ID=$(lsb_release -i -s)
@@ -41,56 +41,49 @@ if [ $? -ne 0 ] ; then
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 fi
-#sudo groupadd docker
-#sudo usermod -aG docker $USER
-#sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-#sudo chmod g+rwx "$HOME/.docker" -R
-echo "State 2/3 (Install docker-compose) "
 
-echo "Check if docker already exists..."
+echo "[${YELLOW}-${NC}] State 2/3 (Install docker-compose) "
+
+echo "[${YELLOW}-${NC}] Check if docker already exists..."
 docker-compose -v
 if [ $? -ne 0 ] ; then
-	echo "--> Docker-Compose is not installed, installation starts..."
+	echo "[${YELLOW}-${NC}] Docker-Compose is not installed, installation starts..."
 
-	# Copy pasting from: https://docs.docker.com/compose/install/ 
+	# Copy paste from: https://docs.docker.com/compose/install/ 
 	sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 	sudo chmod +x /usr/local/bin/docker-compose
 fi
 
-echo "State 3/3 (Setting up variables and installing the OpenBio Executor) "
+echo "[${YELLOW}-${NC}] State 3/3 (Setting up variables and installing the OpenBio Executor) "
 
 
-# Set user input for executor name
-read -e -p "Enter your executor name: " EXECUTOR_INSTANCE
+# Set user input for executor name, if the input is empty take default value ("main")
+read -e -p "[${LGREEN}-->${NC}] Enter your executor name: " EXECUTOR_INSTANCE
 if [ -z $EXECUTOR_INSTANCE ]; then 
 	export EXECUTOR_INSTANCE="main"
-	echo "Executor name is unset, take default value: main"; 
+	echo "[${YELLOW}-${NC}] Executor name is unset, take default value: main"; 
 else 
-	echo "Executor name is set : '$EXECUTOR_INSTANCE'"; 
+	echo "[${YELLOW}-${NC}] Executor name is set : '$EXECUTOR_INSTANCE'"; 
 fi
 
 # Set OBC_EXECUTOR PATH
 export OBC_EXECUTOR_PATH="/home/${USER}/obc_executor_${EXECUTOR_INSTANCE}"
 
-echo "Set installation path on your environment: ${OBC_EXECUTOR_PATH}" 
-# Generate the installation file
+echo "[${YELLOW}-${NC}] Set installation path on your environment: ${OBC_EXECUTOR_PATH}" 
 mkdir -p ${OBC_EXECUTOR_PATH}
-echo "Make dir exit code"
-echo $?
 export OBC_USER_ID=$(dbus-uuidgen)
 export NETDATA_ID=$(dbus-uuidgen)
 
+#Install uuidgen if is not exist
 if [ $? -eq 1 ] ; then
-	echo "uuidgen is not installed"
-	echo "uuidgen installation start...."
+	echo "[${RED}-${NC}] uuidgen is not installed"
+	echo "[${LGREEN}-${NC}] uuidgen installation start...."
  	sudo apt-get install uuid-runtime
 	export OBC_USER_ID=$(dbus-uuidgen)
 	export NETDATA_ID=$(dbus-uuidgen)
 fi
 
-# cd $OBC_EXECUTOR_PATH
-
-echo -e "Client ID for OpenBioC Server : \033[38;2;0;255;0m${OBC_USER_ID}\033[0m"
+echo -e "[${YELLOW}-${NC}] Client ID for OpenBioC Server : \033[38;2;0;255;0m${OBC_USER_ID}\033[0m"
 export PUBLIC_IP=$(curl http://ip4.me 2>/dev/null | sed -e 's#<[^>]*>##g' | grep '^[0-9]')
 
 # File contains images
@@ -102,8 +95,7 @@ wget -O ${OBC_EXECUTOR_PATH}/airflow.cfg https://raw.githubusercontent.com/manos
 
 # Set obc_executor_run.sh (Optional)
 # wget https://raw.githubusercontent.com/manoskout/docker-airflow/master/obc_executor_run.sh
-#cd $OBC_EXECUTOR_PATH
-echo "Running Directory : $(pwd)"
+echo "[${YELLOW}-${NC}] Running Directory : $(pwd)"
 
 # Check if the pre-selected ports are in use 
 export OBC_AIRFLOW_PORT=8080
@@ -111,24 +103,17 @@ export OBC_EXECUTOR_PORT=5000
 export EXECUTOR_DB_PORT=5432
 export NETDATA_MONITORING_PORT=19998
 
-# Check port function
+# Check port that service could starts running
 function portfinder (){
-	# local result
 	sudo netstat -tulpn | grep $1 > /dev/null 2>&1
 	while [ $? -eq 0 ] ;
 	do
-		# echo "Port : $1 already exist ...."
-		# If the port Already exists check the previous_port + 1 (CHECK THAT)
 		set -- $(expr $1 + 1) $1
-		# echo "New port check, in port : $1"
 		sudo netstat -tulpn | grep $1 > /dev/null 2>&1
 	done
-	# echo "Exit code of Airflow port Finder : ${?}"
-	# echo "Port which Airflow running : $1"
-	# return $1
 	echo $1
 }
-
+# Environment variables that used from Executor
 cat >> ${OBC_EXECUTOR_PATH}/.env << EOF
 EXECUTOR_INSTANCE=${EXECUTOR_INSTANCE}
 POSTGRES_USER=airflow
@@ -146,28 +131,27 @@ EOF
 #TODO -> change using docker-compose up -f asfsedfsdf.yml(FAILED)
 cd ${OBC_EXECUTOR_PATH}
 sudo docker-compose up -d
-# eval $(cat $OBC_EXECUTOR_PATH/.env | xargs) sudo docker-compose -f $OBC_EXECUTOR_PATH/docker-compose.yml up -d
 
 if [ $? -eq 0 ] ; then 
 
 	export OBC_EXECUTOR_URL="http://${PUBLIC_IP}:${OBC_EXECUTOR_PORT}/${OBC_USER_ID}"
 	export NETDATA_URL="http://${PUBLIC_IP}:${NETDATA_MONITORING_PORT}/${NETDATA_ID}"
-	echo -e "${GREEN}\n\n\n Successful installation \n\n\n\Close tests \n\n ${OBC_EXECUTOR_URL}${NC}"
-	
-	echo -e "${GREEN}\n\n\n Netdata url : ${NETDATA_URL}${NC}"
+	echo -e "${GREEN}\n\n\n Successful installation \n\n\nClose tests ....\n\n${NC}"
+    sudo docker-compose down
 	echo -e "${YELLOW}**IMPORTANT**${NC}"
-	echo -e "${GREEN}\n\tCopy this link below in OpenBioC Settings to confirm the connection: \n${NC}"
+	echo -e "${GREEN}\n\tCopy this link below in OpenBioC Executor Settings to confirm the connection: \n${NC}"
 	echo -e "${LGREEN}${OBC_EXECUTOR_URL}${NC}"
+	echo -e "${GREEN}\n\tNetdata url : \n${NETDATA_URL}${NC}"
 
-	echo -e "${YELLOW}
-	The executor already running on your system. If you like to kill the service simply run:
-		$ docker-compose -f ${OBC_EXECUTOR_PATH} down
-		or, if you like to make some changes on docker-compose.yml or on airflow.cfg file:
-		$ cd ${OBC_EXECUTOR_PATH}  
-
+	echo -e "${WHITE}***Infos***${NC}\n${YELLOW}
+	1)You can run OBC Executor using the following commands:${NC}
+		$ cd ${OBC_EXECUTOR_PATH}
+		$ docker-compose up
+	2)Or, you can kill the Executor by typing the command below:
+		$ cd ${OBC_EXECUTOR_PATH}
+		$ docker-compose down
 	${NC}
 	"
-        sudo docker-compose down
 else
 	echo "Something goes wrong.. Close the service!"
 	sudo docker-compose down
