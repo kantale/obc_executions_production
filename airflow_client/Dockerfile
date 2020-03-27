@@ -83,7 +83,6 @@ COPY script/entrypoint.sh /entrypoint.sh
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
-# EXPOSE 8080 5555 8793
 
 # This fixes permission issues on linux. 
 # The airflow user should have the same UID as the user running docker on the host system.
@@ -94,29 +93,26 @@ RUN \
     && echo "Set airflow's uid to ${DOCKER_UID}"
 
 #USER airflow
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/dags
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS/WORK
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS/TOOL
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/REPORTS/DATA
+#Set OBC_Client
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/dags
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/REPORTS
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/REPORTS/WORK
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/REPORTS/TOOL
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/REPORTS/DATA
 
 WORKDIR ${AIRFLOW_USER_HOME}
-#Set OBC_Client
 ENV FLASK_APP client.py
 ENV FLASK_RUN_HOST 0.0.0.0
-ENV FLASK_ENV development
 
 COPY /client/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY /client/static/ ${AIRFLOW_USER_HOME}/static
 COPY /client/templates/ ${AIRFLOW_USER_HOME}/templates
 COPY /client/client.py ${AIRFLOW_USER_HOME}/
-# COPY /client/REPORTS/ /
-# COPY /client/generated_dags/ /
-# RUN set -ex && apt-get install curl
+
 # Temporary sollution
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/logs
-RUN mkdir -m777 ${AIRFLOW_USER_HOME}/logs/compressed_logs
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/logs
+RUN mkdir -m755 ${AIRFLOW_USER_HOME}/logs/compressed_logs
 # RUN  -m777 ${AIRFLOW_USER_HOME}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["webserver"]
