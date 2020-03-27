@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#
+# NEED UPDATE
 #
 # This script will:
 # 1. Check which port are used
