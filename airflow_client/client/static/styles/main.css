@@ -65,8 +65,6 @@ body {
 #sidebar .nav a{
 
   display: block;
-  /*display: inherit;*/
-  /*width: 45%;*/
   align-items: center;
   background: none;
   color: #CFD8DC;
