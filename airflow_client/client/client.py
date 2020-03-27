@@ -27,33 +27,6 @@ SOME USEFULL VARIABLES TO WORK WITH
   OBC_EXECUTOR_PORT=${OBC_EXECUTOR_PORT}
   OBC_AIRFLOW_PORT=${OBC_AIRFLOW_PORT}
   EXECUTOR_DB_PORT=${EXECUTOR_DB_PORT}
-
-  TODO -> FUTURE CHANGES
-  EXECUTORS_VARIABLES={
-    "general":{
-        "NETDATA_MONITORING_PORT":"19999",
-        "OBC_EXECUTOR_PORT":"5000",
-        "PUBLIC_IP":"213.239.220.77"
-    },
-    "bcaf97d51ff173e5f6723fa55e5a0d5c":
-    {
-        "EXECUTOR_INSTANCE":"production",
-        "POSTGRES_USER":"airflow",
-        "POSTGRES_PASSWORD":"airflow",
-        "POSTGRES_DB":"airflow",
-        "OBC_AIRFLOW_PORT":"8080",
-        "EXECUTOR_DB_PORT":"5432"
-    },
-    "0000000000002245f672awgb3axc2568":
-    {
-        "EXECUTOR_INSTANCE":"test1",
-        "POSTGRES_USER":"aircow",
-        "POSTGRES_PASSWORD":"aircow",
-        "POSTGRES_DB":"aircow",
-        "OBC_AIRFLOW_PORT":"8081",
-        "EXECUTOR_DB_PORT":"5433"
-    }
-}
 '''
 def print_f(message):
     '''
@@ -66,7 +39,6 @@ def docker_setups():
     NOT USED
     Connect with docker api
     '''
-    print_f("aaaa")
     client = docker.from_env()
     return client
 
@@ -105,9 +77,7 @@ if __name__ == '__main__':
 
 # Dag_directory
 dag_directory = f"{os.environ['AIRFLOW_HOME']}/dags/"
-#not fixed we use tha same dir for tool and workflows
-# dag_wf_directory = "dags/wf/"
-# dag_tl_directory = "dags/tool/"
+
 compressed_logfiles = f"{os.environ['AIRFLOW_HOME']}/logs/compressed_logs/"
 
 def create_filename(id):
@@ -309,7 +279,7 @@ def run_wf():
     Get dag content from 
     Request using curl to run the generated dag:
     curl -X POST \
-      http://< PUBLIC IP >:8080/api/experimental/dags/pca_plink_and_plot__1/dag_runs \
+      http://< PUBLIC IP >:<OBC_EXECUTOR_PORT>/api/experimental/dags/<dag_id>/dag_runs \
       -H 'Cache-Control: no-cache' \
       -H 'Content-Type: application/json' \
       -d '{}'
@@ -346,23 +316,18 @@ def run_wf():
     elif work_type == 'workflow':
         workflow_id = data['workflow_id']
         dag_contents = get_workflow_OBC_rest(callback,name,edit,workflow_id)
-        # try:
         if dag_contents['success']!='failed':
             generate_file(workflow_id,dag_contents['dag'])
             payload['status']=dag__trigger(workflow_id,name,edit)
         else:
             payload['status']='failed'
             payload['reason']=dag_contents
-        # except KeyError:
-        #     print_f('Dag not found')
-        #     payload=dag_contents
     else:
         payload['status']="failed"
         payload['error']="Unknown type (worfkflow or tool)"
         # Set executor url 
     payload["executor_url"]=f"http://{os.environ['PUBLIC_IP']}:{os.environ['OBC_AIRFLOW_PORT']}/{os.environ['OBC_USER_ID']}"
     payload["monitor_url"]=f"http://{os.environ['PUBLIC_IP']}:{os.environ['OBC_EXECUTOR_PORT']}/{os.environ['OBC_USER_ID']}/monitoring"
-    # print_f(f"{pa}"
     return json.dumps(payload)
 
 
@@ -387,12 +352,10 @@ def get_status_of_workflow(dag_id):
         "Cache-Control": "no-cache"
         }
 
-    # payload={} # Future changes for scheduling workflow
     response = requests.get(url)
 
     
 
-    # print_f("---> Response from airflow : ")
     # Check from database if the dag is changed! If it is ch
     paused_dags = [reg[0] for reg in execute_query("SELECT dag_id FROM dag WHERE is_paused").fetchall()]
     print_f(f"Paused dags : {paused_dags}")
@@ -441,7 +404,7 @@ def create_zipfile(content_path,zipped_path,name):
 def getLogs(dag_id):
     '''
         example:
-        http://192.168.1.21:5000/d8a05e4b0d2a46b78dce482378d2c39d/logs/mitsos6
+        http://<IP>:<PORT>/<ID>/logs/<dag_id>
 
         Get the whole logs from workflow execution to zip type
         The logs of execution are seperated in different files (file per step)
@@ -484,20 +447,18 @@ def get_executor_id():
 @app.route(f"/{os.environ['OBC_USER_ID']}/monitoring")
 def monitoring_dashboard():
     """
-    Landing page.
+    Resource monitoring page.
     """
     dags_info = [{'status': 'Total','out': f"{execute_query('SELECT COUNT(1) FROM dag').fetchone()[0]}"},
            {'status': 'Running','out': f"{execute_query('SELECT COUNT(1) FROM dag_run').fetchone()[0]}"},
            {'status': 'Paused','out': f"{execute_query('SELECT COUNT(1) FROM dag WHERE is_paused').fetchone()[0]}"}]
-    # PUBLIC_IP=os.environ['PUBLIC_IP']
     suc_dags={'status':'Succeed', 'out':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'success'").fetchone()[0]}
     failed_dags={'status':'Failed', 'out':execute_query("SELECT COUNT(1) FROM dag_run WHERE state = 'failed'").fetchone()[0]}
-    print_f(f"{os.environ['PUBLIC_IP']}")
     executor_name, executor_id= get_executor_id()
     return render_template('index.html',
            title="OBC Executor Monitoring",
            public_ip=os.environ['PUBLIC_IP'],
-           netdata_port=os.environ['NETDATA_MONITORING_PORT'], #TODO MAKE IT ENVIRONMENT VARIABLE
+           netdata_port=os.environ['NETDATA_MONITORING_PORT'], 
            executor_id=executor_id,
            executor_name=executor_name,
            failed_dags=failed_dags,
@@ -511,13 +472,12 @@ def monitoring_dashboard():
 @app.route(f"/{os.environ['OBC_USER_ID']}/executor_info")
 def dags_data():
     '''
-    Get real time data relative of dags status
+    Get real time data relative of dags status (Every 10 sec)
     '''
     def get_dag_data():
         while True:
             json_data= json.dumps(
                 {   
-                    # 'time':datetime.now(),
                     'total':execute_query('SELECT COUNT(1) FROM dag').fetchone()[0],
                     'running':execute_query('SELECT COUNT(1) FROM dag_run').fetchone()[0],
                     'paused':execute_query('SELECT COUNT(1) FROM dag WHERE is_paused').fetchone()[0],
