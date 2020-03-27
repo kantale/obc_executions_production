@@ -1,6 +1,6 @@
 # VERSION 1.10.9
 # AUTHOR: Manos Koutoulakis
-# DESCRIPTION: Basic Airflow container with OBC-Client in it 
+# DESCRIPTION: Basic Airflow container(Version 1.10.9 ) with OBC-Client in it 
 # BUILD: docker build --rm -t manoskoutoulakis/docker-obc-airflow .
 # SOURCE: https://github.com/manoskout/docker-obc-airflow
 
