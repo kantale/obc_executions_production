@@ -235,7 +235,7 @@ def dag__trigger(id,name,edit):
     which communicate both airflow and OBC_client
     '''
     ret = {}
-    url = f"http://0.0.0.0:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{id}/dag_runs"
+    url = f"http://{os.environ['PUBLIC_IP']}:8080/{os.environ['OBC_USER_ID']}/api/experimental/dags/{id}/dag_runs"
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
